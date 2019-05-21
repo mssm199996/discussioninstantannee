@@ -1,0 +1,1617 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <meta name="generator" content="pandoc">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+  <title>Jaybird 2.2.10 Release Notes</title>
+  <style type="text/css">code{white-space: pre;}</style>
+  <style type="text/css">
+div.sourceCode { overflow-x: auto; }
+table.sourceCode, tr.sourceCode, td.lineNumbers, td.sourceCode {
+  margin: 0; padding: 0; vertical-align: baseline; border: none; }
+table.sourceCode { width: 100%; line-height: 100%; }
+td.lineNumbers { text-align: right; padding-right: 4px; padding-left: 4px; color: #aaaaaa; border-right: 1px solid #aaaaaa; }
+td.sourceCode { padding-left: 5px; }
+code > span.kw { color: #007020; font-weight: bold; } /* Keyword */
+code > span.dt { color: #902000; } /* DataType */
+code > span.dv { color: #40a070; } /* DecVal */
+code > span.bn { color: #40a070; } /* BaseN */
+code > span.fl { color: #40a070; } /* Float */
+code > span.ch { color: #4070a0; } /* Char */
+code > span.st { color: #4070a0; } /* String */
+code > span.co { color: #60a0b0; font-style: italic; } /* Comment */
+code > span.ot { color: #007020; } /* Other */
+code > span.al { color: #ff0000; font-weight: bold; } /* Alert */
+code > span.fu { color: #06287e; } /* Function */
+code > span.er { color: #ff0000; font-weight: bold; } /* Error */
+code > span.wa { color: #60a0b0; font-weight: bold; font-style: italic; } /* Warning */
+code > span.cn { color: #880000; } /* Constant */
+code > span.sc { color: #4070a0; } /* SpecialChar */
+code > span.vs { color: #4070a0; } /* VerbatimString */
+code > span.ss { color: #bb6688; } /* SpecialString */
+code > span.im { } /* Import */
+code > span.va { color: #19177c; } /* Variable */
+code > span.cf { color: #007020; font-weight: bold; } /* ControlFlow */
+code > span.op { color: #666666; } /* Operator */
+code > span.bu { } /* BuiltIn */
+code > span.ex { } /* Extension */
+code > span.pp { color: #bc7a00; } /* Preprocessor */
+code > span.at { color: #7d9029; } /* Attribute */
+code > span.do { color: #ba2121; font-style: italic; } /* Documentation */
+code > span.an { color: #60a0b0; font-weight: bold; font-style: italic; } /* Annotation */
+code > span.cv { color: #60a0b0; font-weight: bold; font-style: italic; } /* CommentVar */
+code > span.in { color: #60a0b0; font-weight: bold; font-style: italic; } /* Information */
+  </style>
+  <link href="data:text/css;charset=utf-8,table%20td%20%7B%0Avertical%2Dalign%3A%20text%2Dtop%3B%0A%7D" rel="stylesheet">
+  <!--[if lt IE 9]>
+    <script src="//cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv-printshiv.min.js"></script>
+  <![endif]-->
+</head>
+<body>
+<header>
+<h1 class="title">Jaybird 2.2.10 Release Notes</h1>
+</header>
+<nav id="TOC">
+<ul>
+<li><a href="#general-notes"><span class="toc-section-number">1</span> General Notes</a><ul>
+<li><a href="#supported-firebird-versions"><span class="toc-section-number">1.1</span> Supported Firebird versions</a></li>
+<li><a href="#supported-java-versions"><span class="toc-section-number">1.2</span> Supported Java versions</a></li>
+<li><a href="#specification-support"><span class="toc-section-number">1.3</span> Specification support</a></li>
+</ul></li>
+<li><a href="#whats-new-in-jaybird-2.2"><span class="toc-section-number">2</span> What's new in Jaybird 2.2</a><ul>
+<li><a href="#changelog"><span class="toc-section-number">2.1</span> Changelog</a><ul>
+<li><a href="#changes-and-fixes-in-jaybird-2.2.10"><span class="toc-section-number">2.1.1</span> Changes and fixes in Jaybird 2.2.10</a></li>
+<li><a href="#changes-and-fixes-in-jaybird-2.2.9"><span class="toc-section-number">2.1.2</span> Changes and fixes in Jaybird 2.2.9</a></li>
+<li><a href="#changes-and-fixes-in-jaybird-2.2.8"><span class="toc-section-number">2.1.3</span> Changes and fixes in Jaybird 2.2.8</a></li>
+<li><a href="#changes-and-fixes-in-jaybird-2.2.7"><span class="toc-section-number">2.1.4</span> Changes and fixes in Jaybird 2.2.7</a></li>
+<li><a href="#changes-and-fixes-in-jaybird-2.2.6"><span class="toc-section-number">2.1.5</span> Changes and fixes in Jaybird 2.2.6</a></li>
+<li><a href="#changes-and-fixes-in-jaybird-2.2.5"><span class="toc-section-number">2.1.6</span> Changes and fixes in Jaybird 2.2.5</a></li>
+<li><a href="#changes-and-fixes-in-jaybird-2.2.4"><span class="toc-section-number">2.1.7</span> Changes and fixes in Jaybird 2.2.4</a></li>
+<li><a href="#changes-and-fixes-in-jaybird-2.2.3"><span class="toc-section-number">2.1.8</span> Changes and fixes in Jaybird 2.2.3</a></li>
+<li><a href="#changes-and-fixes-in-jaybird-2.2.2"><span class="toc-section-number">2.1.9</span> Changes and fixes in Jaybird 2.2.2</a></li>
+<li><a href="#changes-and-fixes-in-jaybird-2.2.1"><span class="toc-section-number">2.1.10</span> Changes and fixes in Jaybird 2.2.1</a></li>
+<li><a href="#changes-and-fixes-since-jaybird-2.2.0-beta-1"><span class="toc-section-number">2.1.11</span> Changes and fixes since Jaybird 2.2.0 beta 1</a></li>
+</ul></li>
+<li><a href="#support-for-getgeneratedkeys"><span class="toc-section-number">2.2</span> Support for getGeneratedKeys()</a></li>
+<li><a href="#java-6-and-jdbc-4.0-api-support"><span class="toc-section-number">2.3</span> Java 6 and JDBC 4.0 API support</a></li>
+<li><a href="#java-7-and-jdbc-4.1-api-support"><span class="toc-section-number">2.4</span> Java 7 and JDBC 4.1 API support</a></li>
+<li><a href="#java-8-and-jdbc-4.2-api-support"><span class="toc-section-number">2.5</span> Java 8 and JDBC 4.2 API support</a></li>
+<li><a href="#jaybird-on-maven"><span class="toc-section-number">2.6</span> Jaybird on Maven</a></li>
+<li><a href="#native-and-embedded-jni-64-bit-windows-and-linux-support"><span class="toc-section-number">2.7</span> Native and Embedded (JNI) 64-bit Windows and Linux support</a></li>
+<li><a href="#support-for-firebird-2.5"><span class="toc-section-number">2.8</span> Support for Firebird 2.5</a></li>
+<li><a href="#support-for-firebird-3.0"><span class="toc-section-number">2.9</span> Support for Firebird 3.0</a></li>
+<li><a href="#improved-support-for-openoffice-libreoffice-base"><span class="toc-section-number">2.10</span> Improved support for OpenOffice / LibreOffice Base</a></li>
+<li><a href="#use-isc_tpb_autocommit-in-auto-commit-mode-experimental"><span class="toc-section-number">2.11</span> Use <code>isc_tpb_autocommit</code> in auto commit mode (experimental)</a></li>
+<li><a href="#other-fixes-and-changes"><span class="toc-section-number">2.12</span> Other fixes and changes</a></li>
+</ul></li>
+<li><a href="#compatibility-changes"><span class="toc-section-number">3</span> Compatibility changes</a><ul>
+<li><a href="#java-support"><span class="toc-section-number">3.1</span> Java support</a></li>
+<li><a href="#firebird-support"><span class="toc-section-number">3.2</span> Firebird support</a></li>
+<li><a href="#important-changes-to-datasources"><span class="toc-section-number">3.3</span> Important changes to Datasources</a></li>
+<li><a href="#future-changes-to-jaybird"><span class="toc-section-number">3.4</span> Future changes to Jaybird</a><ul>
+<li><a href="#removal-of-deprecated-classes-packages-and-interface-methods"><span class="toc-section-number">3.4.1</span> Removal of deprecated classes, packages and (interface) methods</a></li>
+<li><a href="#handling-varchar-character-set-octets-as-varbinary-type"><span class="toc-section-number">3.4.2</span> Handling <code>(VAR)CHAR CHARACTER SET OCTETS</code> as <code>(VAR)BINARY</code> type</a></li>
+<li><a href="#handling-connections-without-explicit-connection-character-set"><span class="toc-section-number">3.4.3</span> Handling connections without explicit connection character set</a></li>
+<li><a href="#replacement-or-upgrade-of-logging-library"><span class="toc-section-number">3.4.4</span> Replacement or upgrade of logging library</a></li>
+<li><a href="#stricter-jdbc-compliance-for-databasemetadata-methods"><span class="toc-section-number">3.4.5</span> Stricter JDBC compliance for <code>DatabaseMetaData</code> methods</a></li>
+</ul></li>
+</ul></li>
+<li><a href="#distribution-package"><span class="toc-section-number">4</span> Distribution package</a><ul>
+<li><a href="#license"><span class="toc-section-number">4.1</span> License</a></li>
+<li><a href="#source-code"><span class="toc-section-number">4.2</span> Source Code</a></li>
+</ul></li>
+<li><a href="#documentation-and-support"><span class="toc-section-number">5</span> Documentation and Support</a><ul>
+<li><a href="#where-to-get-more-information-on-jaybird"><span class="toc-section-number">5.1</span> Where to get more information on Jaybird</a></li>
+<li><a href="#where-to-get-help"><span class="toc-section-number">5.2</span> Where to get help</a></li>
+<li><a href="#contributing"><span class="toc-section-number">5.3</span> Contributing</a></li>
+<li><a href="#reporting-bugs"><span class="toc-section-number">5.4</span> Reporting Bugs</a></li>
+<li><a href="#correctionsadditions-to-release-notes"><span class="toc-section-number">5.5</span> Corrections/Additions to Release Notes</a></li>
+</ul></li>
+<li><a href="#jdbc-url-format"><span class="toc-section-number">6</span> JDBC URL Format</a><ul>
+<li><a href="#pure-java"><span class="toc-section-number">6.1</span> Pure Java</a></li>
+<li><a href="#using-firebird-client-library"><span class="toc-section-number">6.2</span> Using Firebird client library</a></li>
+<li><a href="#embedded-server"><span class="toc-section-number">6.3</span> Embedded Server</a></li>
+</ul></li>
+<li><a href="#using-type-2-and-embedded-server-driver"><span class="toc-section-number">7</span> Using Type 2 and Embedded Server driver</a><ul>
+<li><a href="#configuring-type-2-jdbc-driver"><span class="toc-section-number">7.1</span> Configuring Type 2 JDBC driver</a></li>
+<li><a href="#configuring-embedded-server-jdbc-driver"><span class="toc-section-number">7.2</span> Configuring Embedded Server JDBC driver</a></li>
+<li><a href="#support-for-multiple-jni-libraries"><span class="toc-section-number">7.3</span> Support for multiple JNI libraries</a></li>
+</ul></li>
+<li><a href="#usage-and-reference-manual"><span class="toc-section-number">8</span> Usage and Reference Manual</a><ul>
+<li><a href="#events"><span class="toc-section-number">8.1</span> Events</a></li>
+<li><a href="#default-holdable-result-sets-closed-resultset-in-auto-commit-mode"><span class="toc-section-number">8.2</span> Default holdable result sets (closed ResultSet in auto-commit mode)</a></li>
+<li><a href="#updatable-result-sets"><span class="toc-section-number">8.3</span> Updatable result sets</a></li>
+<li><a href="#firebird-management-interfaces"><span class="toc-section-number">8.4</span> Firebird management interfaces</a></li>
+<li><a href="#jaybird-jdbc-extensions"><span class="toc-section-number">8.5</span> Jaybird JDBC extensions</a></li>
+<li><a href="#jdbc-connection-properties"><span class="toc-section-number">8.6</span> JDBC connection properties</a></li>
+</ul></li>
+<li><a href="#jdbc-compatibility"><span class="toc-section-number">9</span> JDBC Compatibility</a><ul>
+<li><a href="#jdbc-deviations-and-unimplemented-features"><span class="toc-section-number">9.1</span> JDBC deviations and unimplemented features</a></li>
+</ul></li>
+<li><a href="#jaybird-specifics"><span class="toc-section-number">10</span> Jaybird Specifics</a><ul>
+<li><a href="#result-sets"><span class="toc-section-number">10.1</span> Result sets</a></li>
+<li><a href="#using-java.sql.parametermetadata-with-callable-statements"><span class="toc-section-number">10.2</span> Using <code>java.sql.ParameterMetaData</code> with callable Statements</a></li>
+<li><a href="#using-resultset.getcharacterstream-with-blob-fields"><span class="toc-section-number">10.3</span> Using <code>ResultSet.getCharacterStream</code> with blob fields</a></li>
+<li><a href="#heuristic-transaction-completion-support"><span class="toc-section-number">10.4</span> Heuristic transaction completion support</a></li>
+<li><a href="#compatibility-with-com.sun.rowset."><span class="toc-section-number">10.5</span> Compatibility with <code>com.sun.rowset.*</code></a></li>
+<li><a href="#support-for-firebird-3-boolean-type"><span class="toc-section-number">10.6</span> Support for Firebird 3 <code>BOOLEAN</code> type</a></li>
+</ul></li>
+<li><a href="#connection-pooling-with-jaybird"><span class="toc-section-number">11</span> Connection pooling with Jaybird</a><ul>
+<li><a href="#description-of-deprecated-org.firebirdsql.pool-classes"><span class="toc-section-number">11.1</span> Description of deprecated <code>org.firebirdsql.pool</code> classes</a></li>
+<li><a href="#usage-scenario"><span class="toc-section-number">11.2</span> Usage scenario</a></li>
+<li><a href="#connection-pool-classes-deprecated"><span class="toc-section-number">11.3</span> Connection Pool Classes (deprecated)</a></li>
+<li><a href="#org.firebirdsql.pool.fbconnectionpooldatasource-deprecated"><span class="toc-section-number">11.4</span> <code>org.firebirdsql.pool.FBConnectionPoolDataSource</code> (deprecated)</a><ul>
+<li><a href="#standard-jdbc-properties"><span class="toc-section-number">11.4.1</span> Standard JDBC Properties</a></li>
+<li><a href="#pool-properties"><span class="toc-section-number">11.4.2</span> Pool Properties</a></li>
+<li><a href="#runtime-pool-properties"><span class="toc-section-number">11.4.3</span> Runtime Pool Properties</a></li>
+</ul></li>
+<li><a href="#org.firebirdsql.pool.fbwrappingdatasource"><span class="toc-section-number">11.5</span> <code>org.firebirdsql.pool.FBWrappingDataSource</code></a></li>
+<li><a href="#runtime-object-allocation-and-deallocation-hints"><span class="toc-section-number">11.6</span> Runtime object allocation and deallocation hints</a><ul>
+<li><a href="#list-of-properties"><span class="toc-section-number">11.6.1</span> List of properties</a></li>
+</ul></li>
+</ul></li>
+</ul>
+</nav>
+<section id="general-notes" class="level1">
+<h1><span class="header-section-number">1</span> General Notes</h1>
+<p>Jaybird is a JCA/JDBC driver suite to connect to Firebird database servers.</p>
+<p>This driver is based on both the JCA standard for application server connections to enterprise information systems and the well-known JDBC standard.</p>
+<p>The JCA standard specifies an architecture in which an application server can cooperate with a driver so that the application server manages transactions, security, and resource pooling, and the driver supplies only the connection functionality. While similar to the JDBC <code>XADataSource</code> concept, the JCA specification is considerably clearer on the division of responsibility between the application server and driver.</p>
+<section id="supported-firebird-versions" class="level2">
+<h2><span class="header-section-number">1.1</span> Supported Firebird versions</h2>
+<p>Jaybird 2.2.10 was tested against Firebird 2.1.7, Firebird 2.5.5, and Firebird 3 release candidate 2 (3.0.0.32366), but should also support other Firebird versions from 1.0 and up. The Type 2 and embedded server JDBC drivers require the appropriate JNI library. Precompiled JNI binaries for Windows and Linux platforms are shipped in the default installation, other platforms require porting/building the JNI library for that platform.</p>
+<p>Connecting to Firebird 3 requires some additional configuration, see <a href="https://github.com/FirebirdSQL/jaybird/wiki/Jaybird-and-Firebird-3.0-beta-2">Jaybird and Firebird 3.0 Beta 2</a> for details.</p>
+<p>This driver does not support InterBase servers due to Firebird-specific changes in the protocol and database attachment parameters.</p>
+</section>
+<section id="supported-java-versions" class="level2">
+<h2><span class="header-section-number">1.2</span> Supported Java versions</h2>
+<p>Jaybird 2.2.10 supports Java 6 (JDBC 4.0), Java 7 (JDBC 4.1) and Java 8 (JDBC 4.2). Support for earlier Java versions has been dropped.</p>
+<p>The upcoming Jaybird 3.0 will support Java 7 and 8 (and probably 9).</p>
+</section>
+<section id="specification-support" class="level2">
+<h2><span class="header-section-number">1.3</span> Specification support</h2>
+<p>Jaybird supports the following specifications:</p>
+<table style="width:28%;">
+<colgroup>
+<col style="width: 19%"></col>
+<col style="width: 8%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Specification</th>
+<th style="text-align: left;">Notes</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;">JDBC 4.2</td>
+<td style="text-align: left;">Driver does not fully support JDBC 4.2 features, but implements large update count methods by calling the normal update count methods, and methods with <code>SQLType</code> by calling methods accepting the <code>java.sql.Types</code> integer value. Supports new <code>java.Time</code> classes with some caveats.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">JDBC 4.1</td>
+<td style="text-align: left;">Driver implements all JDBC 4.1 methods added to existing interfaces. The driver explicitly supports <code>closeOnCompletion</code>, most other methods introduced with JDBC 4.1 throw <code>SQLFeatureNotSupportedException</code>.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">JDBC 4.0</td>
+<td style="text-align: left;">Driver implements all JDBC 4.0 interfaces and supports exception chaining.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">JCA 1.0</td>
+<td style="text-align: left;">Jaybird provides implementation of <code>javax.resource.spi.ManagedConnectionFactory</code> and related interfaces. CCI interfaces are not supported. Although Jaybird depends on the JCA 1.5 classes, JCA 1.5 compatibility is currently not guaranteed.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;">JTA 1.0.1</td>
+<td style="text-align: left;">Driver provides an implementation of <code>javax.transaction.xa.XAResource</code> interface via JCA framework and <code>XADataSource</code> implementation.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;">JMX 1.2</td>
+<td style="text-align: left;">Jaybird provides a MBean to manage Firebird servers and installed databases via JMX agent.</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="whats-new-in-jaybird-2.2" class="level1">
+<h1><span class="header-section-number">2</span> What's new in Jaybird 2.2</h1>
+<section id="changelog" class="level2">
+<h2><span class="header-section-number">2.1</span> Changelog</h2>
+<section id="changes-and-fixes-in-jaybird-2.2.10" class="level3">
+<h3><span class="header-section-number">2.1.1</span> Changes and fixes in Jaybird 2.2.10</h3>
+<p>The following has been changed or fixed in Jaybird 2.2.10:</p>
+<ul>
+<li>Improvement: Transmit encrypted password (<code>isc_dpb_password_enc</code> and <code>isc_spb_password_enc</code>) in pure java protocol (<a href="http://tracker.firebirdsql.org/browse/JDBC-406">JDBC-406</a>)<br />
+With this change the password is hashed using the UnixCrypt hash. Be aware that this does not really improve security: it only hides the password, but an attacker can still use this hash to gain access to Firebird.</li>
+<li>Improvement: Specify <code>isc_tpb_lock_timeout</code> in transaction mapping (<a href="http://tracker.firebirdsql.org/browse/JDBC-407">JDBC-407</a>)<br />
+This change was already in Jaybird 2.2.9, but not documented. This improvement was contributed by <a href="https://github.com/slavb18">Vjacheslav Borisov</a></li>
+<li>Fixed: <code>DatabaseMetaData.supportsGetGeneratedKeys</code> does not report real availability of generated keys feature (<a href="http://tracker.firebirdsql.org/browse/JDBC-412">JDBC-412</a>)<br />
+<code>DatabaseMetaData.supportsGetGeneratedKeys</code> will now only report <code>true</code> when the statement parser has been loaded (antlr-runtime is on the classpath) and the connected Firebird version supports <code>INSERT .. RETURNING ..</code>.</li>
+<li>Fixed: <code>FBCachedClob</code> throws <code>SQLException</code> instead of <code>SQLFeatureNotSupportedException</code> (<a href="http://tracker.firebirdsql.org/browse/JDBC-414">JDBC-414</a>)<br />
+Some of the optional methods of <code>Clob</code> (especially length related) in <code>FBCachedClob</code> threw <code>FBSQLException</code> which prevents Hibernate from functioning correctly (for example in <code>org.hibernate.type.descriptor.java.DataHelper#determineLengthForBufferSizing</code>). These methods now throw <code>FBDriverNotCapableException</code> (which is a subclass of <code>SQLFeatureNotSupportedException</code>).</li>
+<li>Fixed: Transaction mapping cannot be configured through JDBC URL (<a href="http://tracker.firebirdsql.org/browse/JDBC-421">JDBC-421</a>)</li>
+<li>Fixed: <code>FBSQLWarning.getMessage()</code> could return <code>null</code> instead of message (<a href="http://tracker.firebirdsql.org/browse/JDBC-423">JDBC-423</a>)</li>
+</ul>
+<p><strong>Known issues in Jaybird 2.2.10</strong></p>
+<ul>
+<li>Connecting to Firebird 2.5 and earlier with a Firebird 3 <code>fbclient.dll</code> may be slow with native connections, see <a href="http://tracker.firebirdsql.org/browse/CORE-4658">CORE-4658</a>. Workaround is to connect to the IPv4 address instead of the hostname.</li>
+</ul>
+</section>
+<section id="changes-and-fixes-in-jaybird-2.2.9" class="level3">
+<h3><span class="header-section-number">2.1.2</span> Changes and fixes in Jaybird 2.2.9</h3>
+<p>The following has been changed or fixed in Jaybird 2.2.9:</p>
+<ul>
+<li>Fixed: Result set of type <code>CLOSE_CURSORS_AT_COMMIT</code> isn't correctly closed on commit (<a href="http://tracker.firebirdsql.org/browse/JDBC-307">JDBC-307</a>)<br />
+At commit the client side cursor is correctly closed; no explicit close is sent to the server as the commit will take care of this. This change may result in performance degradation if you use a lot of blobs as those are now properly closed again, we will address this in <a href="http://tracker.firebirdsql.org/browse/JDBC-401">JDBC-401</a> for Jaybird 3.0.</li>
+<li>Fixed: Open (output) blob in auto-commit prevents connection close. Fixed by fixing <em>JDBC-307</em>, see above. (<a href="http://tracker.firebirdsql.org/browse/JDBC-348">JDBC-348</a>)</li>
+<li>New feature (experimental): Use <code>isc_tpb_autocommit</code> in auto commit mode (<a href="http://tracker.firebirdsql.org/browse/JDBC-399">JDBC-399</a>)<br />
+This option is enabled with the connection property <code>useFirebirdAutocommit</code>, see <a href="#use-isc_tpb_autocommit-in-auto-commit-mode-experimental">Use <code>isc_tpb_autocommit</code> in auto commit mode (experimental)</a> for further details. Idea and initial implementation provided by <a href="https://github.com/Smyatkin-Maxim">Smyatkin-Maxim</a>.</li>
+<li>Fixed: &quot;<em>Exception. couldn't close blob: org.firebirdsql.gds.GDSException: invalid BLOB handle</em>&quot; on close of connection obtained from DBCP data source. Fixed by fixing <em>JDBC-307</em>, see above. (<a href="http://tracker.firebirdsql.org/browse/JDBC-400">JDBC-400</a>)</li>
+<li>Fixed: <code>CallableStatement.getMetaData()</code> and <code>getParameterMetaData()</code> call throws exception when no input parameters provided when out parameter registered (<a href="http://tracker.firebirdsql.org/browse/JDBC-402">JDBC-402</a>)<br />
+This changes the error reported when attempting to get metadata of a stored procedure without registering all out parameters. For retrieval of (parameter) metadata it will prepare the statement (potentially with too many parameter placeholders) and leaves error handling to the server.</li>
+<li>Change: <code>ResultSetMetaData</code> will now report <code>(VAR)CHAR CHARACTER SET OCTETS</code> columns as <code>Types.BINARY</code> or <code>Types.VARBINARY</code> when using <code>octetsAsBytes=true</code> connection property. (<a href="http://tracker.firebirdsql.org/browse/JDBC-408">JDBC-408</a>)</li>
+</ul>
+</section>
+<section id="changes-and-fixes-in-jaybird-2.2.8" class="level3">
+<h3><span class="header-section-number">2.1.3</span> Changes and fixes in Jaybird 2.2.8</h3>
+<p>The following has been changed or fixed in Jaybird 2.2.8:</p>
+<ul>
+<li>Support for Java 5 has been dropped</li>
+<li>Fixed: LibreOffice doesn't display tables with more than 41 records (<a href="http://tracker.firebirdsql.org/browse/JDBC-383">JDBC-383</a>)</li>
+<li>Improvement: Don't use Firebird provided IP address for connecting event channel (<a href="http://tracker.firebirdsql.org/browse/JDBC-384">JDBC-384</a>)</li>
+<li>Fixed: <code>Connection.getMetaData().getColumns</code> result set contains wrong (empty) <code>COLUMN_DEF</code> if column type was defined using domain (<a href="http://tracker.firebirdsql.org/browse/JDBC-388">JDBC-388</a>)</li>
+<li>Fixed: Unable to retrieve update count after result set (<a href="http://tracker.firebirdsql.org/browse/JDBC-390">JDBC-390</a>)<br />
+After executing a query that produces a result set, calling <code>getMoreResults</code> will allow <code>getUpdateCount</code> to actually return the update count where previously it always returned <code>-1</code>. This also allows obtaining the update count after a select query (even when executed using <code>executeQuery</code>). For selects the result will usually be <code>0</code>.</li>
+<li>Fixed: <code>SELECT</code> statements are processed for <code>getGeneratedKeys</code> by appending <code>RETURNING</code> (+ all columnnames) (<a href="http://tracker.firebirdsql.org/browse/JDBC-391">JDBC-391</a>)</li>
+<li>Fixed: Generated key grammar does not correctly handle quoted table names (<a href="http://tracker.firebirdsql.org/browse/JDBC-392">JDBC-392</a>)</li>
+<li>Fixed: Generated key grammar does not detect returning clause in update and delete (<a href="http://tracker.firebirdsql.org/browse/JDBC-393">JDBC-393</a>)</li>
+</ul>
+</section>
+<section id="changes-and-fixes-in-jaybird-2.2.7" class="level3">
+<h3><span class="header-section-number">2.1.4</span> Changes and fixes in Jaybird 2.2.7</h3>
+<p>The following has been changed or fixed in Jaybird 2.2.7:</p>
+<ul>
+<li>Fixed: blob return value of executable procedure obtained through getters on <code>CallableStatement</code> is 8 byte blob id, instead of expected blob content (<a href="http://tracker.firebirdsql.org/browse/JDBC-381">JDBC-381</a>)<br />
+This was a regression caused by the changes of <a href="http://tracker.firebirdsql.org/browse/JDBC-350">JDBC-350</a>.</li>
+</ul>
+</section>
+<section id="changes-and-fixes-in-jaybird-2.2.6" class="level3">
+<h3><span class="header-section-number">2.1.5</span> Changes and fixes in Jaybird 2.2.6</h3>
+<p>The following has been changed or fixed in Jaybird 2.2.6:</p>
+<ul>
+<li>Reverted Firebird 3 workaround for updatable result sets as bug has been fixed in Firebird (<a href="http://tracker.firebirdsql.org/browse/JDBC-330">JDBC-330</a>)</li>
+<li>Fixed: Processing and closing the <code>ResultSet</code> from callable statement and then using the getters throws <code>NullPointerException</code> (<a href="http://tracker.firebirdsql.org/browse/JDBC-350">JDBC-350</a>)<br />
+Using both the getters and the result set for the same callable statement is incorrect; the ability to do this might be removed in a future version of Jaybird. A <code>ResultSet</code> should be used for selectable procedures, while the getters should be used with executable procedures.</li>
+<li>Fixed: <code>FBManagedConnectionFactory.tryCompleteInLimboTransaction</code> doesn't work with recent Firebird 3 builds (<a href="http://tracker.firebirdsql.org/browse/JDBC-353">JDBC-353</a>)</li>
+<li>Fixed: Jaybird can throw a <code>NullPointerException</code> when a fatal connection error has occurred (<a href="http://tracker.firebirdsql.org/browse/JDBC-359">JDBC-359</a>)</li>
+<li>Fixed: Calling close on a JCA connection triggers exception <em>Connection enlisted in distributed transaction</em> (<a href="http://tracker.firebirdsql.org/browse/JDBC-362">JDBC-362</a>)</li>
+<li>Fixed: Potential memory-leak when using a lot of different connection strings and/or properties (<a href="http://tracker.firebirdsql.org/browse/JDBC-364">JDBC-364</a>)</li>
+<li>Fixed: <code>FBRowUpdater.buildInsertStatement</code> doesn't quote column names (<a href="http://tracker.firebirdsql.org/browse/JDBC-370">JDBC-370</a>)</li>
+<li>Fixed: <code>EncodingFactory</code> doesn't handle <code>UnsupportedCharsetException</code> (<a href="http://tracker.firebirdsql.org/browse/JDBC-371">JDBC-371</a>)</li>
+<li>Fixed: Current method of quoting in <code>FBRowUpdater</code> incorrect for dialect 1 (<a href="http://tracker.firebirdsql.org/browse/JDBC-372">JDBC-372</a>)</li>
+</ul>
+</section>
+<section id="changes-and-fixes-in-jaybird-2.2.5" class="level3">
+<h3><span class="header-section-number">2.1.6</span> Changes and fixes in Jaybird 2.2.5</h3>
+<p>The following has been changed or fixed in Jaybird 2.2.5:</p>
+<ul>
+<li>Fixed: <code>getCrossReference</code> broken by changes of <a href="http://tracker.firebirdsql.org/browse/JDBC-331">JDBC-331</a> (<a href="http://tracker.firebirdsql.org/browse/JDBC-335">JDBC-335</a>)</li>
+<li>Added: basic support for Java 8 <code>java.time</code> in <code>PreparedStatement.setObject()</code> and <code>ResultSet.updateObject()</code> (<a href="http://tracker.firebirdsql.org/browse/JDBC-339">JDBC-339</a>)<br />
+As part of this change the supported sub-second precision for <code>java.sql.Timestamp</code> has been increased from 1 millisecond to the maximum Firebird precision of 100 microseconds (or 0.1 millisecond)<a href="#fn1" class="footnoteRef" id="fnref1"><sup>1</sup></a>.</li>
+<li>Fixed: Deadlocks and other thread safety issues with classes in <code>org.firebirdsql.pool</code> (<a href="http://tracker.firebirdsql.org/browse/JDBC-341">JDBC-341</a>)</li>
+</ul>
+</section>
+<section id="changes-and-fixes-in-jaybird-2.2.4" class="level3">
+<h3><span class="header-section-number">2.1.7</span> Changes and fixes in Jaybird 2.2.4</h3>
+<p>The following has been changed or fixed in Jaybird 2.2.4:</p>
+<ul>
+<li>Fixed: Exceptions during statement preparation leave connection and transaction open after explicit close (<a href="http://tracker.firebirdsql.org/browse/JDBC-311">JDBC-311</a>)</li>
+<li>Fixed batch update (or insert) with blob set through <code>setBinaryStream()</code> sets empty blob for all but the first batch entry (<a href="http://tracker.firebirdsql.org/browse/JDBC-312">JDBC-312</a>)</li>
+<li>Fixed incomplete checks of database, transaction, statement and blob handle validity before continuing with actions. These incomplete checks could lead to unexpected exceptions (for example a <code>NullPointerException</code> in <code>iscDatabaseInfo</code>) (<a href="http://tracker.firebirdsql.org/browse/JDBC-313">JDBC-</a><a href="http://tracker.firebirdsql.org/browse/JDBC-313">313</a>)</li>
+<li>Fixed error when setting connection charset equal to &quot;<code>file.encoding</code>&quot; java property (<a href="http://tracker.firebirdsql.org/browse/JDBC-314">JDBC-314</a>)</li>
+<li>Fixed connection character set not correctly set when specifying the Java connection characterset (<code>charSet</code> or <code>localEncoding</code> property) (<a href="http://tracker.firebirdsql.org/browse/JDBC-315">JDBC-315</a>)</li>
+<li>Fixed incorrect lengths and/or radix reported by <code>getTypeInfo</code> and <code>getColumns</code> metadata (<a href="http://tracker.firebirdsql.org/browse/JDBC-317">JDBC-317</a>, <a href="http://tracker.firebirdsql.org/browse/JDBC-318">JDBC-318</a>)</li>
+<li>Initial Java 8 / JDBC 4.2 support (<a href="http://tracker.firebirdsql.org/browse/JDBC-319">JDBC-319</a>)</li>
+<li>Firebird 3 <code>BOOLEAN</code> type support, see <a href="#support-for-firebird-3-boolean-type">Support for Firebird 3 <code>BOOLEAN</code> type</a> (<a href="http://tracker.firebirdsql.org/browse/JDBC-321">JDBC-321</a>)</li>
+<li>Added fallback of loading <code>GDSFactoryPlugin</code> implementations to prevent <code>NullPointerException</code> in Hibernate reverse engineering wizard in NetBeans (<a href="http://tracker.firebirdsql.org/browse/JDBC-325">JDBC-325</a>)</li>
+<li>Fixed: Jaybird should specify dialect 3 in dpb when no explicit dialect was set (<a href="http://tracker.firebirdsql.org/browse/JDBC-327">JDBC-327</a>)</li>
+<li>Fixed: several <code>DatabaseMetaData</code> methods defined by JDBC to only accept the actual table name also accepted a <code>LIKE</code>-pattern or empty string or <code>null</code>. This was changed to conform to JDBC. This change can break applications that relied on the incorrect behavior (<a href="http://tracker.firebirdsql.org/browse/JDBC-331">JDBC-331</a>)<br />
+Affected methods are: <code>getPrimaryKeys</code>, <code>getBestRowIdentifier</code>, <code>getImportedKeys</code>, <code>getExportedKeys</code> and <code>getCrossReference</code>. As part of this change <code>getIndexInfo</code> now handles names in the wrong case slightly different.Jaybird 3.0 will further modify and restrict the pattern matching and case sensitivity of metadata methods. See <a href="#future-changes-to-jaybird">Future changes to Jaybird</a>.</li>
+</ul>
+</section>
+<section id="changes-and-fixes-in-jaybird-2.2.3" class="level3">
+<h3><span class="header-section-number">2.1.8</span> Changes and fixes in Jaybird 2.2.3</h3>
+<p>The following has been changed or fixed in Jaybird 2.2.3:</p>
+<ul>
+<li>Fixed incorrect synchronization in native and embedded protocol (JNI) implementation for <code>iscBlobInfo</code> and <code>iscSeekBlob</code> (<a href="http://tracker.firebirdsql.org/browse/JDBC-300">JDBC-300</a>)<br />
+WARNING: Although Jaybird strives for correct synchronization, a JDBC <code>Connection</code>, and its dependent objects should be used from a single <code>Thread</code> at a time, sharing on multiple threads concurrently is not advisable.</li>
+<li>Fixed holdable <code>ResultSet</code> is closed on auto-commit (<a href="http://tracker.firebirdsql.org/browse/JDBC-304">JDBC-304</a>, <a href="http://tracker.firebirdsql.org/browse/JDBC-305">JDBC-305</a>)</li>
+<li>Fixed table names missing or padded with spaces in Database view of IntelliJ IDEA (<a href="http://tracker.firebirdsql.org/browse/JDBC-308">JDBC-308</a>, <a href="http://youtrack.jetbrains.com/issue/IDEA-100786">IDEA-100786</a>)</li>
+<li>Fixed incorrect JDBC minor version reported under Java 7; this resulted in an incorrect column name (for Java 7) in the metadata of <code>DatabaseMetaData.getColumns(...)</code> (<a href="http://tracker.firebirdsql.org/browse/JDBC-309">JDBC-309</a>)</li>
+<li>Added <code>IOException</code> to cause of <code>GDSException</code> with error 335544721; &quot;<em>Unable to complete network request to host &quot;&quot;</em>&quot; for further investigation (<a href="http://tracker.firebirdsql.org/browse/JDBC-306">JDBC-306</a>)</li>
+</ul>
+</section>
+<section id="changes-and-fixes-in-jaybird-2.2.2" class="level3">
+<h3><span class="header-section-number">2.1.9</span> Changes and fixes in Jaybird 2.2.2</h3>
+<p>The following has been changed or fixed in Jaybird 2.2.2:</p>
+<ul>
+<li>Fixed: <code>FBMaintenanceManager.listLimboTransactions()</code> reports incorrect transaction id when the result contains multi-site transactions in limbo (<a href="http://tracker.firebirdsql.org/browse/JDBC-266">JDBC-266</a>)</li>
+<li>Fixed: Calling <code>PreparedStatement.setClob(int, Clob)</code> with a non-Firebird <code>Clob</code> (eg like Hibernate does) or calling <code>PreparedStatement.setClob(int, Reader)</code> throws <code>FBSQLException</code>: &quot;You can't start before the beginning of the blob&quot; (<a href="http://tracker.firebirdsql.org/browse/JDBC-281">JDBC-281</a>)</li>
+<li>Fixed: Connection property types not properly processed from <code>isc_dpb_types.properties</code> (<a href="http://tracker.firebirdsql.org/browse/JDBC-284">JDBC-284</a>)</li>
+<li>Fixed: JNI implementation of parameter buffer writes incorrect integers (<a href="http://tracker.firebirdsql.org/browse/JDBC-285">JDBC-285</a>, <a href="http://tracker.firebirdsql.org/browse/JDBC-286">JDBC-286</a>)</li>
+<li>Changed: Throw <code>SQLException</code> when calling <code>execute</code>, <code>executeQuery</code>, <code>executeUpdate</code> and <code>addBatch</code> methods accepting a query string on a <code>PreparedStatement</code> or <code>CallableStatement</code> as required by JDBC 4.0 (<a href="http://tracker.firebirdsql.org/browse/JDBC-288">JDBC-288</a>)<br />
+NOTE: Be ware that this change can break existing code if you depended on the old, non-standard behavior! With <code>addBatch(String)</code> the old behavior lead to a memory leak and unexpected results.</li>
+<li>Fixed: <code>LIKE</code> escape character JDBC escape (<code>{escape '&lt;char&gt;'}</code>) doesn't work (<a href="http://tracker.firebirdsql.org/browse/JDBC-290">JDBC-290</a>)</li>
+<li>Added: Support for a connect timeout using connection property <code>connectTimeout</code>. This property can be specified in the JDBC URL or <code>Propertie</code>s object or on the <code>DataSource</code>. If the <code>connectTimeout</code> property is not specified, the general <code>DriverManager</code> property <code>loginTimeout</code> is used. The value is the timeout in seconds. (<a href="http://tracker.firebirdsql.org/browse/JDBC-295">JDBC-295</a>)<br />
+For the Java wire protocol the connect timeout will detect unreachable hosts. In the JNI implementation (native protocol) the connect timeout works as the DPB item <code>isc_dpb_connect_timeout</code> which only works after connecting to the server for the <code>op_accept</code> phase of the protocol. This means that – for the native protocol – the connect timeout will not detect unreachable hosts within the timeout. As that might be unexpected, an <code>SQLWarning</code> is added to the connection if the property is specified with the native protocol.</li>
+<li>As part of the connect timeout change, hostname handling (if the hostname is an IP-address) in the Java wire protocol was changed. This should not have an impact in recent Java versions, but on older Java versions (Java 5 up to update 5) this might result in a delay in connecting using an IP-address, if that address can't be reverse-resolved to a hostname. Workaround is to add an entry for that IP-address to the <code>/etc/hosts</code> or <code>%WINDIR%\System32\Drivers\etc\hosts</code> file.</li>
+</ul>
+</section>
+<section id="changes-and-fixes-in-jaybird-2.2.1" class="level3">
+<h3><span class="header-section-number">2.1.10</span> Changes and fixes in Jaybird 2.2.1</h3>
+<p>The following has been changed or fixed in Jaybird 2.2.1:</p>
+<ul>
+<li>Fixed: <code>UnsatisfiedLinkError</code> in <code>libjaybird22(_x64).so undefined symbol: _ZTVN10__cxxabiv117__class_type_infoE</code> on Linux (<a href="http://tracker.firebirdsql.org/browse/JDBC-259">JDBC-259</a>)</li>
+<li>Added connection property <code>columnLabelForName</code> for backwards compatible behavior of <code>ResultSetMetaData#getColumnName(int)</code> and compatibility with bug in <code>com.sun.rowset.CachedRowSetImpl</code> (<a href="http://tracker.firebirdsql.org/browse/JDBC-260">JDBC-260</a>)<br />
+Set property to <code>true</code> for backwards compatible behavior (<code>getColumnName()</code> returns the column label); don't set the property or set it to <code>false</code> for JDBC-compliant behavior (recommended).</li>
+<li>Fixed:<code>setString(column, null)</code> on &quot;<code>? IS (NOT) NULL</code>&quot; condition does not set parameter to <code>NULL</code> (<a href="http://tracker.firebirdsql.org/browse/JDBC-264">JDBC-264</a>)</li>
+<li>The <code>charSet</code> connection property now accepts all aliases of the supported Java character sets (eg instead of only <code>Cp1252</code> now <code>windows-1252</code> is also accepted) (<a href="http://tracker.firebirdsql.org/browse/JDBC-267">JDBC-267</a>)</li>
+<li>Fixed: values of <code>charSet</code> property are case-sensitive (<a href="http://tracker.firebirdsql.org/browse/JDBC-268">JDBC-268</a>)</li>
+<li>Fixed: setting a parameter as <code>NULL</code> with the native protocol does not work when Firebird describes the parameter as not nullable (<a href="http://tracker.firebirdsql.org/browse/JDBC-271">JDBC-271</a>)</li>
+</ul>
+</section>
+<section id="changes-and-fixes-since-jaybird-2.2.0-beta-1" class="level3">
+<h3><span class="header-section-number">2.1.11</span> Changes and fixes since Jaybird 2.2.0 beta 1</h3>
+<p>The following was changed or fixed after the release of Jaybird 2.2.0 beta 1:</p>
+<ul>
+<li><code>ConcurrentModificationException</code> when closing connection obtained from <code>org.firebirdsql.ds.FBConnectionPoolDataSource</code> with statements open (<a href="http://tracker.firebirdsql.org/browse/JDBC-250">JDBC-250</a>)</li>
+<li>Memory leak when obtaining multiple connections for the same URL (<a href="http://tracker.firebirdsql.org/browse/JDBC-249">JDBC-249</a>)</li>
+<li>CPU spikes to 100% when using events and Firebird Server is stopped or unreachable (<a href="http://tracker.firebirdsql.org/browse/JDBC-232">JDBC-232</a>)</li>
+<li>Events do not work on Embedded (<a href="http://tracker.firebirdsql.org/browse/JDBC-247">JDBC-247</a>)</li>
+<li>Provide workaround for character set transliteration problems in database filenames and other connection properties (<a href="http://tracker.firebirdsql.org/browse/JDBC-253">JDBC-253</a>); see also <a href="#support-for-firebird-2.5">Support for Firebird 2.5</a>.</li>
+<li><code>FBBackupManager</code> does not allow 16kb page size for restore (<a href="http://tracker.firebirdsql.org/browse/JDBC-255">JDBC-255</a>)</li>
+<li>Log warning and add warning on <code>Connection</code> when no explicit connection character set is specified (<a href="http://tracker.firebirdsql.org/browse/JDBC-257">JDBC-257</a>)</li>
+</ul>
+</section>
+</section>
+<section id="support-for-getgeneratedkeys" class="level2">
+<h2><span class="header-section-number">2.2</span> Support for getGeneratedKeys()</h2>
+<p>Support was added for the <code>getGeneratedKeys()</code> functionality for <code>Statement</code> and <code>PreparedStatement</code>.</p>
+<p>There are four distinct use-cases:</p>
+<ol type="1">
+<li><p>Methods accepting an <code>int</code> parameter with values of <code>Statement.NO_GENERATED_KEYS</code> and <code>Statement.RETURN_GENERATED_KEYS</code></p>
+<p>When <code>NO_GENERATED_KEYS</code> is passed, the query will be executed as a normal query.</p>
+<p>When <code>RETURN_GENERATED_KEYS</code> is passed, the driver will add <strong><em>all</em></strong> columns of the table in ordinal position order (as in the (JDBC) metadata of the table). It is advisable to retrieve the values from the <code>getGeneratedKeys()</code> result set by column name.</p>
+<p>We opted to include all columns as it is next to impossible to decide which columns are filled by a trigger or otherwise and only returning the primary key will be too limiting</p></li>
+<li><p>Methods accepting an <code>int[]</code> parameter with column indexes.</p>
+<p>The values in the <code>int[]</code> parameter are the ordinal positions of the columns as specified in the (JDBC) metadata of the table. For a null or empty array the statement is processed as is. Invalid ordinal positions are ignored and silently dropped (be aware: the JDBC specification is not entirely clear if this is valid behavior, so this might change in the future)</p></li>
+<li><p>Methods accepting a <code>String[]</code> parameter with column names.</p>
+<p>The values in the <code>String[]</code> are the column names to be returned. The column names provided are processed as is and are not checked for validity or the need of quoting. Providing non-existent or incorrectly (un)quoted columns will result in an exception when the statement is processed by Firebird.</p>
+<p>This method is the fastest as it does not retrieve metadata from the server.</p></li>
+<li><p>Providing a query already containing a <code>RETURNING</code> clause. In this case all of the previous cases are ignored and the query is executed as is. It is possible to retrieve the result set using <code>getGeneratedKeys()</code>.</p>
+<p>This functionality will only be available if the ANTLR 3.4 runtime classes are on the classpath. Except for calling methods with <code>NO_GENERATED_KEYS</code>, absence of the ANTLR runtime will throw <code>FBDriverNotCapableException</code>.</p></li>
+</ol>
+<p>This functionality should work for <code>INSERT</code> (from Firebird 2.0), and for <code>UPDATE</code>, <code>UPDATE OR INSERT</code> and <code>DELETE</code> (from Firebird 2.1).</p>
+</section>
+<section id="java-6-and-jdbc-4.0-api-support" class="level2">
+<h2><span class="header-section-number">2.3</span> Java 6 and JDBC 4.0 API support</h2>
+<p>Support was added for the following JDBC 4.0 features:</p>
+<ul>
+<li>Automatic driver loading: on Java 6 and later it is no longer necessary to use <code>Class.forName(&quot;org.firebirdsql.jdbc.FBDriver&quot;)</code> to load the driver</li>
+<li>Implementation of <code>java.sql.Wrapper</code> interface on various JDBC classes; in general it only unwraps to the specific implementation class (and superclasses) and implemented interfaces</li>
+<li>Support for chained exceptions (use <code>getNextException()</code> and <code>iterator()</code> to view other, related exceptions) and <code>getCause()</code> to retrieve the cause (deprecating similar <code>getInternalException()</code>)</li>
+<li>Support for <code>getClientInfo()</code> and <code>setClientInfo()</code> on <code>Connection</code></li>
+</ul>
+</section>
+<section id="java-7-and-jdbc-4.1-api-support" class="level2">
+<h2><span class="header-section-number">2.4</span> Java 7 and JDBC 4.1 API support</h2>
+<p>Support was added for the following JDBC 4.1 features:</p>
+<ul>
+<li>try-with-resources <a href="#fn2" class="footnoteRef" id="fnref2"><sup>2</sup></a></li>
+<li>Statement <code>closeOnCompletion</code></li>
+</ul>
+<p>Other methods added by JDBC 4.1 will throw <code>FBDriverNotCapableException</code> (a subclass of <code>SQLFeatureNotSupportedException</code>).</p>
+</section>
+<section id="java-8-and-jdbc-4.2-api-support" class="level2">
+<h2><span class="header-section-number">2.5</span> Java 8 and JDBC 4.2 API support</h2>
+<p>Minimal support for JDBC 4.2 was added in Jaybird 2.2.4 and extended in 2.2.5:</p>
+<ul>
+<li>Large update counts: no actual support is provided, method call is forwarded to the normal update count method returning an <code>int</code>.</li>
+<li>Methods accepting <code>java.sql.SQLType</code>: no actual support is provided, method call is forwarded to equivalent method accepting a <code>java.sql.Types</code> integer value.</li>
+<li><p><code>PreparedStatement.setObject()</code> and <code>ResultSet.updateObject()</code> now accept <code>java.time</code> objects:</p>
+<table>
+<thead>
+<tr class="header">
+<th style="text-align: left;"></th>
+<th style="text-align: center;"><code>DATE</code></th>
+<th style="text-align: center;"><code>TIME</code></th>
+<th style="text-align: center;"><code>TIMESTAMP</code></th>
+<th style="text-align: center;"><code>(VAR)CHAR</code></th>
+<th style="text-align: center;"><code>BLOB SUB_TYPE TEXT</code></th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>java.time.LocalTime</code></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>java.time.LocalDate</code></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>java.time.LocalDateTime</code></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>java.time.OffsetTime</code></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>java.time.OffsetDateTime</code></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;">X</td>
+<td style="text-align: center;">X</td>
+</tr>
+</tbody>
+</table></li>
+<li><p>Retrieval of <code>java.time</code> objects using <code>getObject(int, Class&lt;?&gt;)</code> and <code>getObject(String, Class&lt;?&gt;)</code> is not yet supported.</p></li>
+</ul>
+</section>
+<section id="jaybird-on-maven" class="level2">
+<h2><span class="header-section-number">2.6</span> Jaybird on Maven</h2>
+<p>Jaybird 2.2.10 is available on maven, with a separate artifact for each supported Java version.</p>
+<p>Groupid: <code>org.firebirdsql.jdbc</code>, artifactid: <code>jaybird-jdkXX</code> (where <code>XX</code> is <code>16</code>, <code>17</code> or <code>18</code>).<br />
+Version: <code>2.2.10</code></p>
+<p>For example:</p>
+<div class="sourceCode"><pre class="sourceCode xml"><code class="sourceCode xml"><span class="kw">&lt;dependency&gt;</span>
+    <span class="kw">&lt;groupId&gt;</span>org.firebirdsql.jdbc<span class="kw">&lt;/groupId&gt;</span>
+    <span class="kw">&lt;artifactId&gt;</span>jaybird-jdk18<span class="kw">&lt;/artifactId&gt;</span>
+    <span class="kw">&lt;version&gt;</span>2.2.10<span class="kw">&lt;/version&gt;</span>
+<span class="kw">&lt;/dependency&gt;</span></code></pre></div>
+<p>When deploying to a JavaEE environment, exclude the <code>javax.resource</code> <code>connector-api</code> dependency as this will be provided by the application server.</p>
+</section>
+<section id="native-and-embedded-jni-64-bit-windows-and-linux-support" class="level2">
+<h2><span class="header-section-number">2.7</span> Native and Embedded (JNI) 64-bit Windows and Linux support</h2>
+<p>The JNI libraries for native and embedded support now also have a 64 bit version.</p>
+</section>
+<section id="support-for-firebird-2.5" class="level2">
+<h2><span class="header-section-number">2.8</span> Support for Firebird 2.5</h2>
+<p>Added support for Firebird 2.5 Services API enhancements:</p>
+<ul>
+<li>The security database can be set</li>
+<li>Support for SET/DROP AUTO ADMIN</li>
+<li>Mapping for new role RDB$ADMIN in security database</li>
+<li>Added new Firebird 2.1 shutdown/online modes available in Firebird 2.5 via the Services API</li>
+<li>Support for NBackup via Services API in Firebird 2.5</li>
+<li>Support for Trace/Audit via Services API in Firebird 2.5</li>
+</ul>
+<p>Since Firebird 2.5, Firebird supports full UTF-8 database filenames and other connection properties (Database Parameter Buffer values). Jaybird does not yet support these changes, but a workaround is available:</p>
+<p>This workaround consists of two steps:</p>
+<ol type="1">
+<li>Ensure your Java application is executed with the system property <code>file.encoding=UTF-8</code> (either because that is the default encoding for your OS, or by explicitly specifying this property on the commandline of your application using <code>-Dfile.encoding=UTF-8</code>)</li>
+<li>Include property <code>utf8_filename=1</code> in the JDBC URL or (non-standard) properties of the datasource</li>
+</ol>
+<p>This will only work if the Firebird server is version 2.5 or higher.</p>
+</section>
+<section id="support-for-firebird-3.0" class="level2">
+<h2><span class="header-section-number">2.9</span> Support for Firebird 3.0</h2>
+<p>Jaybird 2.2.x only supports Firebird 3.0 using the legacy authentication. The new authentication model and wire protocol encryption is not yet supported. Technically these new protocol options will work when using the Type 2 driver, but this hasn't been fully tested.</p>
+<p>When using Jaybird with Firebird 3.0, make sure that</p>
+<ul>
+<li>Wire protocol encryption is net set to <code>Required</code> (set it to <code>Enabled</code> or <code>Disabled</code>)</li>
+<li>Legacy authentication is enabled on server</li>
+<li>The user has been created with the legacy usermanager</li>
+</ul>
+<p>The new <code>BOOLEAN</code> data type is supported</p>
+<p>See the <a href="https://github.com/FirebirdSQL/jaybird/wiki/Jaybird-and-Firebird-3.0-beta-2">Jaybird and Firebird 3.0 beta 2</a> for more details.</p>
+</section>
+<section id="improved-support-for-openoffice-libreoffice-base" class="level2">
+<h2><span class="header-section-number">2.10</span> Improved support for OpenOffice / LibreOffice Base</h2>
+<p>The interpretation of the JDBC standard by Jaybird differs from the interpretation by OpenOffice / LibreOffice. To address some of the problems caused by these differences, Jaybird now provides a separate protocol for OpenOffice / LibreOffice.</p>
+<p>When connecting from Base, use the protocol prefix <code>jdbc:firebirdsql:oo:</code>. Be aware that this is a variant of the pure Java wire protocol and not the native or embedded protocol.</p>
+<p>Issues addressed by this protocol:</p>
+<ul>
+<li>Result sets are not closed when a statements is finished (eg fully read <code>ResultSet</code> or when creating a new Statement in auto-commit mode)</li>
+<li><code>DatabaseMetaData#getTablePrivileges(...)</code> reports privileges granted to <code>PUBLIC</code> and to the current role (as reported by <code>CURRENT_ROLE</code>) as being granted to the user <em>(after Jaybird 2.2.0 beta 1)</em>.</li>
+</ul>
+</section>
+<section id="use-isc_tpb_autocommit-in-auto-commit-mode-experimental" class="level2">
+<h2><span class="header-section-number">2.11</span> Use <code>isc_tpb_autocommit</code> in auto commit mode (experimental)</h2>
+<p><em>Added in Jaybird 2.2.9</em></p>
+<p>This option is enabled by specifying the connection property <code>useFirebirdAutocommit=true</code>.</p>
+<p>With this option, Jaybird will configure the transaction to use <code>isc_tpb_autocommit</code> with <code>autoCommit=true</code>. This means that Firebird server will internally commit the transaction after each statement completion. Jaybird itself will not commit until connection close (or switching to <code>autoCommit=false</code>). The exception is if the statement was of type <code>isc_info_sql_stmt_ddl</code>, in that case Jaybird will commit on statement success and rollback on statement failure (just like it does for all statements in normal auto commit mode). The reason is that Firebird for some DDL commands only executes at a real commit boundary and relying on the Firebird auto-commit is insufficient.</p>
+<p>On statement completion (as specified in JDBC), result sets will still close unless they are holdable over commit. The result set is only closed client side, which means that the cursor remains open server side to prevent roundtrips. This may lead to additional resource usage server side unless explicitly closed in the code. Note that any open blobs will be closed client- and server-side (until this is improved with <a href="http://tracker.firebirdsql.org/browse/JDBC-401">JDBC-401</a>).</p>
+<p>A connection can be interrogated using <code>FirebirdConnection.isUseFirebirdAutocommit()</code> if it uses <code>isc_tpb_autocommit</code>.</p>
+<p>If you manually add <code>isc_tpb_autocommit</code> to the transaction parameter buffer and you enable this option, the <code>isc_tpb_autocommit</code> will be removed from the TPB if <code>autoCommit=false</code>.</p>
+<p>Artificial testing with repeated inserts (using a prepared statement) against a Firebird server on localhost shows that this leads to a reduction of execution time of +/- 7%.</p>
+<p>Support for this option is experimental, and should only be enabled if you 1) know what you're doing, and 2) really need this feature. Internally <code>isc_tpb_autocommit</code> uses <code>commit_retaining</code>, which means that using this feature may increase the transaction gap with associated sweep and garbage collection impact.</p>
+</section>
+<section id="other-fixes-and-changes" class="level2">
+<h2><span class="header-section-number">2.12</span> Other fixes and changes</h2>
+<ul>
+<li>Replaced <code>mini-j2ee.jar</code> with <code>connector-api-1.5.jar</code>: make sure to remove the old <code>mini-j2ee.jar</code> from the classpath of your application.</li>
+<li>Dropped <code>jaybird-pool</code> jar from the distribution (all classes are included in the <code>jaybird</code> jar and the <code>jaybird-full</code> jar).</li>
+<li><code>FBResultSetMetaData#getcolumnName(int)</code> will now return the original column name (if available) for compliance with the JDBC specification, <code>getColumnLabel(int)</code> will still return the alias (or the column name if no alias is defined). See <a href="#compatibility-with-com.sun.rowset.">Compatibility with <code>com.sun.rowset.*</code></a> for potential problems when using the reference implementation of <code>CachedRowSet</code>.<br />
+Jaybird 2.2.1 introduced the connection property <code>columnLabelForName</code> which will revert to the old behavior when set to <code>true</code>. Be aware that the old behavior is not JDBC-compliant.</li>
+<li><code>FBDatabaseMetaData</code> has been updated to include metadata columns defined by JDBC 3.0, 4.0 and 4.1. This also changes the position of <code>OWNER_NAME</code> column in the result set of <code>getTables(..)</code>as this column is Jaybird-specific and not defined in JDBC.</li>
+<li><code>FBDatabaseMetaData#getIndexInfo(..)</code> now also returns expression indexes. The <code>COLUMN_NAME</code> column will contain the expression (if available).</li>
+<li><code>FBDatabaseMetaData#getIndexInfo(..)</code> now correctly limits the returned indexes to unique indexes when parameter <code>unique</code> is set to <code>true</code>.</li>
+<li>The connection property <code>octetsAsBytes</code> can be used to identify fields with <code>CHARACTER SET OCTETS</code> as being <code>(VAR)BINARY</code> (in <code>ResultSetMetaData</code> only).</li>
+<li>The <code>getTime(</code>), <code>getDate()</code>, <code>getTimestamp()</code> methods which take a <code>Calendar</code> object now correctly handle conversions around Daylight Savings Time (DST) changes. Before, the time was first converted to the local JVM timezone, and then to the timezone of the provided <code>Calendar</code>, this could lose up to an hour in time. Now the time is converted directly to the timezone of the provided <code>Calendar</code>. (<a href="http://tracker.firebirdsql.org/browse/JDBC-154">JDBC-154</a>)</li>
+</ul>
+<p>A full list of changes is also available at:</p>
+<ul>
+<li><a href="http://tracker.firebirdsql.org/secure/ReleaseNote.jspa?projectId=10002&amp;styleName=Text&amp;version=10723">Jaybird 2.2.10</a></li>
+<li><a href="http://tracker.firebirdsql.org/secure/ReleaseNote.jspa?projectId=10002&amp;styleName=Text&amp;version=10691">Jaybird 2.2.9</a></li>
+<li><a href="http://tracker.firebirdsql.org/secure/ReleaseNote.jspa?version=10664&amp;styleName=Text&amp;projectId=10002">Jaybird 2.2.8</a></li>
+<li><a href="http://tracker.firebirdsql.org/secure/ReleaseNote.jspa?version=10660&amp;styleName=Text&amp;projectId=10002">Jaybird 2.2.7</a></li>
+<li><a href="http://tracker.firebirdsql.org/secure/ReleaseNote.jspa?version=10588&amp;styleName=Text&amp;projectId=10002">Jaybird 2.2.6</a></li>
+<li><a href="http://tracker.firebirdsql.org/secure/ReleaseNote.jspa?version=10582&amp;styleName=Text&amp;projectId=10002">Jaybird 2.2.5</a></li>
+<li><a href="http://tracker.firebirdsql.org/secure/ReleaseNote.jspa?version=10531&amp;styleName=Text&amp;projectId=10002">Jaybird 2.2.4</a></li>
+<li><a href="http://tracker.firebirdsql.org/secure/ReleaseNote.jspa?version=10510&amp;styleName=Text&amp;projectId=10002">Jaybird 2.2.3</a></li>
+<li><a href="http://tracker.firebirdsql.org/secure/ReleaseNote.jspa?projectId=10002&amp;styleName=Text&amp;version=10480">Jaybird 2.2.2</a></li>
+<li><a href="http://tracker.firebirdsql.org/secure/ReleaseNote.jspa?version=10474&amp;styleName=Text&amp;projectId=10002">Jaybird 2.2.1</a></li>
+<li><a href="http://tracker.firebirdsql.org/secure/ReleaseNote.jspa?version=10053&amp;styleName=Text&amp;projectId=10002">Jaybird 2.2.0</a></li>
+</ul>
+</section>
+</section>
+<section id="compatibility-changes" class="level1">
+<h1><span class="header-section-number">3</span> Compatibility changes</h1>
+<p>Jaybird 2.2 introduces some changes in compatibility and announces future breaking changes. The version previously announced as Jaybird 2.3 will be released as Jaybird 3.0.</p>
+<section id="java-support" class="level2">
+<h2><span class="header-section-number">3.1</span> Java support</h2>
+<p>Java 5 support has been dropped starting with Jaybird 2.2.8 as Java 5 has been on End-Of-Public-Updates<a href="#fn3" class="footnoteRef" id="fnref3"><sup>3</sup></a>status since October 2009.</p>
+<p>Java 6 support will be dropped for Jaybird 3.0 as Java 6 has been on End-Of-Public-Updates status since February 2013. This is a change from previous announcements that support would be dropped with Jaybird 3.1.</p>
+<p>Java 7 support will be dropped for Jaybird 3.1 as Java 7 has been on End-Of-Public-Updates status since April 2015.</p>
+<p>Java 9 support is expected to be introduced with Jaybird 3.0. There are no plans to add Java 9 support to Jaybird 2.2.x, although the driver is expected to function if JDBC 4.3 specific features are avoided.</p>
+</section>
+<section id="firebird-support" class="level2">
+<h2><span class="header-section-number">3.2</span> Firebird support</h2>
+<p>Jaybird 2.2 supports Firebird 1.0 and higher, but is only tested with Firebird 2.1, 2.5 and 3.0.</p>
+<p>Firebird 1.0 and 1.5 support will be dropped with Jaybird 3.0. In general this should not impact the use of the driver, but might have impact on the availability and use of metadata information. This also means that starting with Jaybird 3.0, bugs that only occur with Firebird 1.0 and 1.5 will not be fixed.</p>
+<p>Firebird 2.0 support will be dropped with Jaybird 3.1.</p>
+</section>
+<section id="important-changes-to-datasources" class="level2">
+<h2><span class="header-section-number">3.3</span> Important changes to Datasources</h2>
+<p>The <code>ConnectionPoolDataSource</code> and <code>XADataSource</code> implementations in <code>org.firebirdsql.pool</code> and <code>org.firebirdsql.pool.sun</code> contain several bugs with regard to pool and connection management when used by a JavaEE application server. The decision was made to write new implementations in the package <code>org.firebirdsql.ds</code>.</p>
+<p>The following implementation classes have been deprecated and will be removed in Jaybird 3.0:</p>
+<ul>
+<li><code>org.firebirdsql.pool.DriverConnectionPoolDataSource</code></li>
+<li><code>org.firebirdsql.pool.FBConnectionPoolDataSource</code></li>
+<li><code>org.firebirdsql.pool.sun.AppServerDataSource</code></li>
+<li><code>org.firebirdsql.pool.sun.AppServerXADataSource</code></li>
+<li><code>org.firebirdsql.jca.FBXADataSource</code></li>
+<li><code>org.firebirdsql.pool.SimpleDataSource</code></li>
+</ul>
+<p>Their replacement classes are:</p>
+<ul>
+<li><code>org.firebirdsql.ds.FBConnectionPoolDataSource</code></li>
+<li><code>org.firebirdsql.ds.FBXADataSource</code></li>
+<li><code>org.firebirdsql.pool.FBSimpleDataSource</code> (a normal <code>DataSource</code>)</li>
+</ul>
+<p>We strongly urge you to switch to these new implementations if you are using these classes in an application server. The bugs are described in <a href="http://tracker.firebirdsql.org/browse/JDBC-86">JDBC-86</a>, <a href="http://tracker.firebirdsql.org/browse/JDBC-93">JDBC-93</a>, <a href="http://tracker.firebirdsql.org/browse/JDBC-131">JDBC-131</a> and <a href="http://tracker.firebirdsql.org/browse/JDBC-144">JDBC-144</a>.</p>
+<p>The deprecated classes can still be used with the <code>DataSource</code> implementations <code>WrappingDataSource</code> as the identified bugs do not occur with this implementation, but we advise you to switch to <code>FBSimpleDataSource</code>. If you require a standalone connection pool (outside an application server) or statement pooling, please consider using a third-party connection pool like C3P0, DBCP or HikariCP.</p>
+<p>The new <code>ConnectionPoolDataSource</code> and <code>XADataSource</code> implementations only provide the basic functionality specified in the JDBC specifications and do <strong>not</strong> provide any pooling itself. The <code>ConnectionPoolDataSource</code> and <code>XADataSource</code> are intended to be <strong>used by</strong> connection pools (as provided by application servers) and should not be connection pools themselves.</p>
+</section>
+<section id="future-changes-to-jaybird" class="level2">
+<h2><span class="header-section-number">3.4</span> Future changes to Jaybird</h2>
+<p>The next versions of Jaybird will include some – potentially – breaking changes. We advise to check your code if you will be affected by these changes and prepare for these changes if possible.</p>
+<section id="removal-of-deprecated-classes-packages-and-interface-methods" class="level3">
+<h3><span class="header-section-number">3.4.1</span> Removal of deprecated classes, packages and (interface) methods</h3>
+<p>As announced above, the <code>ConnectionPoolDataSource</code> implementations in <code>org.firebirdsql.pool</code> and <code>org.firebirdsql.jca</code> will be removed in Jaybird 3.0. The entire <code>org.firebirdsql.pool</code> package will be removed.</p>
+<p>The following (deprecated) classes will also be removed:</p>
+<ul>
+<li><code>org.firebirdsql.jdbc.FBWrappingDataSource</code> (old deprecated class subclassing <code>org.firebirdsql.pool.FBWrappingDataSource</code>), only included in <code>jaybird-full</code> jar</li>
+</ul>
+<p>Furthermore the following interfaces will be removed as they are no longer needed:</p>
+<ul>
+<li><code>FirebirdSavepoint</code> (identical to <code>java.sql.Savepoint</code>)</li>
+</ul>
+<p>The following interfaces will have some of the methods removed:</p>
+<ul>
+<li><code>FirebirdConnection</code>
+<ul>
+<li><code>setFirebirdSavepoint()</code> replace with <code>Connection#setSavepoint()</code></li>
+<li><code>setFirebirdSavepoint(String name)</code> replace with <code>Connection#setSavepoint(String name)</code></li>
+<li><code>rollback(FirebirdSavepoint savepoint)</code> replace with <code>Connection#rollback(Savepoint savepoint)</code></li>
+<li><code>releaseSavepoint(FirebirdSavepoint savepoint)</code> replace with <code>Connection#releaseSavepoint(Savepoint savepoint)</code></li>
+</ul></li>
+</ul>
+<p>Visibility of the following classes will be reduced as they are implementation artifacts and should not be considered API:</p>
+<ul>
+<li><code>org.firebirdsql.jdbc.FBDriverPropertyManager</code> (to package private)</li>
+</ul>
+<p>If you are still using these interfaces, classes or methods, please change your code to use the JDBC interface or method instead.</p>
+</section>
+<section id="handling-varchar-character-set-octets-as-varbinary-type" class="level3">
+<h3><span class="header-section-number">3.4.2</span> Handling <code>(VAR)CHAR CHARACTER SET OCTETS</code> as <code>(VAR)BINARY</code> type</h3>
+<p>From Jaybird 3.0 on <code>(VAR)CHAR CHARACTER SET OCTETS</code> will be considered to be of <code>java.sql.Types</code> type <code>(VAR)BINARY</code>. This should not impact normal use of methods like <code>get/setString()</code>, but will impact the metadata and the type of object returned by <code>getObject()</code> (a byte array instead of a String).</p>
+</section>
+<section id="handling-connections-without-explicit-connection-character-set" class="level3">
+<h3><span class="header-section-number">3.4.3</span> Handling connections without explicit connection character set</h3>
+<p>When no connection character set has been specified (properties <code>lc_ctype</code> or <code>encoding</code> with Firebird character set, or <code>charSet</code> or <code>localEncoding</code> with Java character set), Jaybird will currently use the <code>NONE</code> character set. This means that the Firebird server will return the bytes for <code>(VAR)CHAR</code> columns as they are stored, while Jaybird will convert between bytes and Strings using the local platform encoding.</p>
+<p>This default has the potential of corrupting data when switching platforms or using the same database with different local encodings, or for transliteration errors when the database character set does not accept some byte combinations. We are currently discussing changing this behavior (see <a href="http://tracker.firebirdsql.org/browse/JDBC-257">JDBC-257</a>). We haven't decided on the exact changes yet, but most likely the next version of Jaybird will refuse to connect without an explicit connection character set. For the time being, Jaybird will log a warning and add a warning on the <code>Connection</code> when no explicit character set was specified.</p>
+<p>Review your use of the connection character sets and change it if you are not specifying it explicitly. Be aware that changing this may require you to fix the data as it is currently stored in your database if your database character set does not match the local platform encoding of your Java application. If you are sure that <code>NONE</code> is the correct character set for you, specify it explicitly in your connection string or connection properties.</p>
+</section>
+<section id="replacement-or-upgrade-of-logging-library" class="level3">
+<h3><span class="header-section-number">3.4.4</span> Replacement or upgrade of logging library</h3>
+<p>Logging in Jaybird 3.0 will be changed. We will probably switch to <code>java.util.logging</code>, but we are also considering slf4j, or upgrading Log4J to version 2.x.</p>
+</section>
+<section id="stricter-jdbc-compliance-for-databasemetadata-methods" class="level3">
+<h3><span class="header-section-number">3.4.5</span> Stricter JDBC compliance for <code>DatabaseMetaData</code> methods</h3>
+<p>The current implementation of <code>DatabaseMetaData</code> methods do not conform to the JDBC specification when it comes to case sensitivity and quoted object names.</p>
+<p>In Jaybird 3.0 meta data methods will no longer do the following:</p>
+<ul>
+<li>Remove quotes around object names</li>
+<li>Trying the uppercase value, when the original parameter value failed to produce results</li>
+</ul>
+<p>For example:</p>
+<div class="sourceCode"><pre class="sourceCode sql"><code class="sourceCode sql"><span class="kw">CREATE</span> <span class="kw">TABLE</span> tablename (
+   column1 INTEGER,
+   <span class="ot">&quot;column2&quot;</span> INTEGER
+);</code></pre></div>
+<p>In Jaybird 2.2 using <code>getColumns(null, null, &quot;tablename&quot;, &quot;column%&quot;)</code> will return <code>COLUMN1</code>(!). Unquoted object names are stored uppercase in Firebird, so in Jaybird 3.0 this will produce <strong>no rows</strong> as <code>tablename</code> does not match <code>TABLENAME</code>.</p>
+<p>Changing the query to <code>getColumns(null, null, &quot;TABLENAME&quot;, &quot;column%&quot;)</code> in Jaybird 2.2 and 3.0 will only produce <strong>one row</strong> (with <code>column2</code>), as <code>COLUMN1</code> does not match <code>column%</code>.</p>
+<p>In Jaybird 2.2 using <code>getColumns(null, null, &quot;\&quot;TABLENAME\&quot;&quot;, &quot;column%&quot;)</code> will return <code>column2</code> as the quotes will be stripped, with Jaybird 3.0 this will produce <strong>no rows</strong>.</p>
+</section>
+</section>
+</section>
+<section id="distribution-package" class="level1">
+<h1><span class="header-section-number">4</span> Distribution package</h1>
+<p>The following file groups can be found in distribution package:</p>
+<ul>
+<li><code>jaybird-2.2.10.jar</code> – archive containing JCA/JDBC driver, implementation of connection pooling and statement pooling interfaces, and JMX management class. It requires JCA 1.5.</li>
+<li><code>jaybird-full-2.2.10.jar</code> – merge of <code>jaybird-2.2.10.jar</code> and <code>connector-api-1.5.jar</code>.<br />
+This archive can be used for standalone Jaybird deployments, it should not be used within application servers.</li>
+<li><code>jaybird-2.2.10-sources.jar</code> – archive containing the sources of Jaybird (specific to this JDK version); for including Jaybird sources in your IDE.</li>
+<li><code>lib/connector-api-1.5.jar</code> – archive containing JCA 1.5 classes (required dependency).</li>
+<li><code>lib/antlr-runtime-3.4.jar</code> – archive containing ANTLR runtime classes, required for generated keys functionality (optional dependency).</li>
+<li><code>lib/log4j-core.jar</code> – archive containing core Log4J classes that provide logging (optional dependency).</li>
+</ul>
+<p>Jaybird has compile-time and run-time dependencies on the JCA 1.5 classes. Additionally, if Log4J classes are found in the class path, it is possible to enable extensive logging inside the driver. If the ANTLR runtime classes are absent, the generated keys functionality will not be available.</p>
+<p>Native dependencies (required only for Type 2 and Embedded):</p>
+<ul>
+<li><code>jaybird22.dll</code> – Windows 32-bit</li>
+<li><code>jaybird22_x64.dll</code> – Windows 64-bit</li>
+<li><code>libjaybird22.so</code> – Linux 32-bit (x86)</li>
+<li><code>libjaybird22_x64.so</code> – Linux 64-bit (AMD/Intel 64)</li>
+</ul>
+<p>The Windows DLLs have been built with Microsoft Visual Studio 2010 SP1. To use the native or embedded driver, you will need to install the Microsoft Visual C++ 2010 SP 1 redistributable available at:</p>
+<ul>
+<li>x86: <a href="http://www.microsoft.com/download/en/details.aspx?id=8328" class="uri">http://www.microsoft.com/download/en/details.aspx?id=8328</a></li>
+<li>x64: <a href="http://www.microsoft.com/download/en/details.aspx?id=13523" class="uri">http://www.microsoft.com/download/en/details.aspx?id=13523</a></li>
+</ul>
+<section id="license" class="level2">
+<h2><span class="header-section-number">4.1</span> License</h2>
+<p>Jaybird JCA/JDBC driver is distributed under the GNU Lesser General Public License (LGPL). Text of the license can be obtained from <a href="http://www.gnu.org/copyleft/lesser.html" class="uri">http://www.gnu.org/copyleft/lesser.html</a>.</p>
+<p>Using Jaybird (by importing Jaybird's public interfaces in your Java code), and extending Jaybird by subclassing or implementation of an extension interface (but not abstract or concrete class) is considered by the authors of Jaybird to be dynamic linking. Hence our interpretation of the LGPL is that the use of the unmodified Jaybird source does not affect the license of your application code.</p>
+<p>Even more, all extension interfaces to which application might want to link are released under dual LGPL/modified BSD license. Latter is basically &quot;AS IS&quot; license that allows any kind of use of that source code. Jaybird should be viewed as an implementation of that interfaces and LGPL section for dynamic linking is applicable in this case.</p>
+</section>
+<section id="source-code" class="level2">
+<h2><span class="header-section-number">4.2</span> Source Code</h2>
+<p>The distribution package contains the normal sources in <code>jaybird-2.2.10-sources.jar</code>; this file does not include the sources of the tests, nor the sourcecode for other JDK-versions.</p>
+<p>Full source code, including tests and build files, can be obtained from the GitHub repository. The repository URL is <a href="https://github.com/FirebirdSQL/jaybird" class="uri">https://github.com/FirebirdSQL/jaybird</a></p>
+</section>
+</section>
+<section id="documentation-and-support" class="level1">
+<h1><span class="header-section-number">5</span> Documentation and Support</h1>
+<section id="where-to-get-more-information-on-jaybird" class="level2">
+<h2><span class="header-section-number">5.1</span> Where to get more information on Jaybird</h2>
+<p>The most detailed information can be found in the Jaybird Frequently Asked Questions (FAQ). The FAQ is included in the distribution, and is available on-line in several places.</p>
+<p>JaybirdWiki is available at <a href="https://github.com/FirebirdSQL/jaybird/wiki" class="uri">https://github.com/FirebirdSQL/jaybird/wiki</a></p>
+<p>Jaybird 2.1 Programmers Manual: <a href="http://www.firebirdsql.org/file/documentation/drivers_documentation/Jaybird_2_1_JDBC_driver_manual.pdf" class="uri">http://www.firebirdsql.org/file/documentation/drivers_documentation/Jaybird_2_1_JDBC_driver_manual.pdf</a></p>
+</section>
+<section id="where-to-get-help" class="level2">
+<h2><span class="header-section-number">5.2</span> Where to get help</h2>
+<p>The best place to start is the FAQ. Many details for using Jaybird with various programs are located there. Below are some links to useful web sites.</p>
+<ul>
+<li>The <a href="http://groups.yahoo.com/group/Firebird-Java" class="uri">http://groups.yahoo.com/group/Firebird-Java</a> and corresponding mailing-list <code>Firebird-Java@yahoogroups.com</code></li>
+<li>The code for Firebird and this driver are on <a href="https://github.com/FirebirdSQL/jaybird" class="uri">https://github.com/FirebirdSQL/jaybird</a></li>
+<li>The Firebird project home page <a href="http://www.firebirdsql.org/" class="uri">http://www.firebirdsql.org/</a></li>
+</ul>
+</section>
+<section id="contributing" class="level2">
+<h2><span class="header-section-number">5.3</span> Contributing</h2>
+<p>There are several ways you can contribute to Jaybird or Firebird in general:</p>
+<ul>
+<li>Participate on the mailinglists (see <a href="http://www.firebirdsql.org/en/mailing-lists/" class="uri">http://www.firebirdsql.org/en/mailing-lists/</a>)</li>
+<li>Report bugs or submit patches on the tracker (see below)</li>
+<li>Create pull requests on GitHub (<a href="https://github.com/FirebirdSQL/jaybird" class="uri">https://github.com/FirebirdSQL/jaybird</a>)<br />
+</li>
+<li>Become a developer (for Jaybird contact us on Firebird-Java, for Firebird in general, use the Firebird-devel mailing-list)</li>
+<li>Become a paying member or sponsor of the Firebird Foundation (see <a href="http://www.firebirdsql.org/en/firebird-foundation/" class="uri">http://www.firebirdsql.org/en/firebird-foundation/</a>)</li>
+</ul>
+<p>See also <a href="http://www.firebirdsql.org/en/consider-your-contribution/" class="uri">http://www.firebirdsql.org/en/consider-your-contribution/</a></p>
+</section>
+<section id="reporting-bugs" class="level2">
+<h2><span class="header-section-number">5.4</span> Reporting Bugs</h2>
+<p>The developers follow the <code>Firebird-Java@yahoogroups.com</code> list. Join the list and post information about suspected bugs. List members may be able to help out to determine if it is an actual bug, provide a workaround and get you going again, whereas bug fixes might take awhile.</p>
+<p>If you are sure that this is a bug you can report it in the Firebird bug tracker, project &quot;Java Client (Jaybird)&quot; at <a href="http://tracker.firebirdsql.org/browse/JDBC" class="uri">http://tracker.firebirdsql.org/browse/JDBC</a></p>
+<p>When reporting bugs, please provide a minimal, but complete reproduction, including databases and sourcecode to reproduce the problem. Patches to fix bugs are also appreciated. Make sure the patch is against a recent master version of the code. You can also fork the jaybird repository and create pull requests.</p>
+</section>
+<section id="correctionsadditions-to-release-notes" class="level2">
+<h2><span class="header-section-number">5.5</span> Corrections/Additions to Release Notes</h2>
+<p>Please send corrections, suggestions, or additions to these Release Notes to the mailing list at <a href="mailto:Firebird-Java@yahoogroups.com">Firebird-Java@yahoogroups.com</a>.</p>
+</section>
+</section>
+<section id="jdbc-url-format" class="level1">
+<h1><span class="header-section-number">6</span> JDBC URL Format</h1>
+<p>Jaybird provides different JDBC URLs for different usage scenarios:</p>
+<section id="pure-java" class="level2">
+<h2><span class="header-section-number">6.1</span> Pure Java</h2>
+<pre><code>jdbc:firebirdsql://host[:port]/&lt;database&gt;</code></pre>
+<p>Default URL, will connect to the database using the Type 4 JDBC driver using the Java implementation of the Firebird wire-protocol. Best suited for client-server applications with dedicated database server. Port can be omitted (default value is <code>3050</code>), host name must be present.</p>
+<p>The <code>&lt;database&gt;</code> part should be replaced with the database alias or the path to the database. In general it is advisable to uses database aliases instead of the path the file.</p>
+<p>On Linux the root <code>/</code> should be included in the path. A database located on <code>/opt/firebird/db.fdb</code> should use the URL below (note the double slash after port!).</p>
+<pre><code>jdbc:firebirdsql://host:port//opt/firebird/db.fdb</code></pre>
+<p>Deprecated but still available alternative URL:</p>
+<pre><code>jdbc:firebirdsql:host[/port]:&lt;database&gt;</code></pre>
+</section>
+<section id="using-firebird-client-library" class="level2">
+<h2><span class="header-section-number">6.2</span> Using Firebird client library</h2>
+<pre><code>jdbc:firebirdsql:native:host[/port]:&lt;database&gt;</code></pre>
+<p>Type 2 driver, will connect to the database using client library (<code>fbclient.dll</code> on Windows, and <code>libfbclient.so</code> on Linux). Requires correct installation of the client library.</p>
+<pre><code>jdbc:firebirdsql:local:&lt;database&gt;</code></pre>
+<p>Type 2 driver in local mode. Uses client library as in previous case, however will not use socket communication, but rather access database directly. Requires correct installation of the client library.</p>
+</section>
+<section id="embedded-server" class="level2">
+<h2><span class="header-section-number">6.3</span> Embedded Server</h2>
+<pre><code>jdbc:firebirdsql:embedded:&lt;database&gt;</code></pre>
+<p>Similar to the Firebird client library, however <code>fbembed.dll</code> on Windows and <code>libfbembed.so</code> on Linux are used. Requires correctly installed and configured Firebird embedded library.</p>
+</section>
+</section>
+<section id="using-type-2-and-embedded-server-driver" class="level1">
+<h1><span class="header-section-number">7</span> Using Type 2 and Embedded Server driver</h1>
+<p>Jaybird 2.2 provides a Type 2 JDBC driver that uses the native client library to connect to the databases. Additionally Jaybird 2.2 can use the embedded version of Firebird so Java applications do not require a separate server setup.</p>
+<p>However the Type 2 driver has its limitations:</p>
+<p>Due to multi-threading issues in the Firebird client library as well as in the embedded server version, it is not possible to access a single connection from different threads simultaneously. When using the client library only one thread is allowed to access a connection at a time. Access to different connections from different threads is however allowed. Client library in local mode and embedded server library on Linux do not allow multithreaded access to the library. Jaybird provides necessary synchronization in Java code, however the mutex is local to the classloader that loaded the Jaybird driver.</p>
+<p><strong>Care should be taken when deploying applications in web or application servers: put jar files in the main library directory of the web and/or application server, not in the library directory of the web or enterprise application (WEB-INF/lib directory or in the .EAR file).</strong></p>
+<section id="configuring-type-2-jdbc-driver" class="level2">
+<h2><span class="header-section-number">7.1</span> Configuring Type 2 JDBC driver</h2>
+<p>The Type 2 JDBC driver requires the Jaybird JNI library to be installed and available to the Java Virtual Machine. Precompiled binaries for Windows and Linux platforms are distributed with Jaybird.</p>
+<p><strong>Please note that Jaybird 2.2 provides an update to the JNI libraries to support new features. It is not compatible with the JNI library for Jaybird 2.1 or earlier.</strong></p>
+<ul>
+<li><code>jaybird22.dll / jaybird22_x64.dll</code> is a precompiled binary for the Windows platform. It was successfully tested with Windows XP and Windows 7, 8, 8.1 and 10, but there should be no issues in other Windows OS versions (as long as the MS Visual C++ 2010 SP1 distributable is available). The library should be copied into a directory in the <code>PATH</code> environment variable, or be made available to the JVM using the <code>java.library.path</code> system property.</li>
+<li><code>libjaybird22.so / libjaybird22_x64.so</code> is a precompiled binary for the Linux platform (AMD/Intel). It must be available via the <code>LD_LIBRARY_PATH</code> environment variable, or be made available to the JVM using the <code>java.library.path</code> system property. Dependent libraries (<code>libfbclient.so</code> or <code>libfbembed.so</code>) need to be on the <code>LD_LIBRARY_PATH</code>. The <code>java.library.path</code> is ignored for these libraries as they are loaded from the JNI library, and not from Java. Some Firebird distributions will not create <code>libfbclient.so</code> (but only <code>libfbclient.so.2</code> and <code>.so.2.5</code>), you will need to add a symlink with the name as expected by Jaybird.</li>
+<li>Other platforms can compile the JNI library by checking out the Jaybird sources from GitHub and using <code>./build.sh compile-native</code> command in the directory with checked out sources.</li>
+</ul>
+<p>After making Jaybird JNI library available to the JVM, the application has to tell driver to start using this by either specifying TYPE2 or LOCAL type in the connection pool or data source properties or using appropriate JDBC URL when connecting via <code>java.sql.DriverManager</code>.</p>
+</section>
+<section id="configuring-embedded-server-jdbc-driver" class="level2">
+<h2><span class="header-section-number">7.2</span> Configuring Embedded Server JDBC driver</h2>
+<p>The Embedded Server JDBC driver uses the same JNI library and configuration steps for the Type 2 JDBC driver.</p>
+<p>There is however one issue related to the algorithm of Firebird Embedded Server installation directory resolution. Firebird server uses a pluggable architecture for internationalization. By default server loads <code>fbintl.dll</code> or <code>libfbintl.so</code> library that contains various character encodings and collation orders. This library is expected to be installed in the <code>intl/</code> subdirectory of the server installation. The algorithm of directory resolution is the following:</p>
+<ol type="1">
+<li><code>FIREBIRD</code> environment variable.</li>
+<li><code>RootDirectory</code> parameter in the <code>firebird.conf</code> file.</li>
+<li>The directory where server binary is located.</li>
+</ol>
+<p>When Embedded Server is used from Java and no <code>FIREBIRD</code> environment variable is specified, it tries to find <code>firebird.conf</code> in the directory where the application binary is located. In our case the application binary is the JVM and therefore Embedded Server tries to find its configuration file in the <code>bin/</code> directory of the JDK or JRE installation. The same happens to the last item of the list. In most cases this is not desired behavior.</p>
+<p>Therefore, if the application uses character encodings, UDFs or wants to fine-tune server behavior through the configuration file, the <code>FIREBIRD</code> environment variable must be specified and point to the installation directory of the Embedded Server, e.g. current working directory.</p>
+</section>
+<section id="support-for-multiple-jni-libraries" class="level2">
+<h2><span class="header-section-number">7.3</span> Support for multiple JNI libraries</h2>
+<p>Up to Jaybird 2.0 only one client library could be loaded in a single JVM. That could be either an embedded Firebird library (<code>fbembed.dll</code>/<code>libfbembed.so</code>), or Firebird client library (<code>fbclient.dll</code>/<code>libfbclient.so</code>). This could lead to problems, For example, if embedded Firebird was used first, the JDBC driver would access the database file directly instead of using the local IPC protocol if only the path to the database was specified. It was not possible to change this without restarting the JVM.</p>
+<p>Since Jaybird 2.1, Jaybird is able to correctly load arbitrary number of shared libraries that implement the ISC API and forward the requests correctly depending on the type of the driver being used.</p>
+</section>
+</section>
+<section id="usage-and-reference-manual" class="level1">
+<h1><span class="header-section-number">8</span> Usage and Reference Manual</h1>
+<section id="events" class="level2">
+<h2><span class="header-section-number">8.1</span> Events</h2>
+<p>Events is one of the unique features in the Firebird RDBMS and allows asynchronous notification of the applications about named events that happen in the database. Information on this feature can found in the free IB 6.0 documentation set as well as in The Firebird Book by Helen Borrie.</p>
+<p>The interfaces and classes for the event support can be found in <code>org.firebirdsql.event</code> package, which includes:</p>
+<ul>
+<li><code>EventManager</code> interface to register for the synchronous and asynchronous notification about the events in the database;</li>
+<li><code>EventListener</code> interface which has to be implemented by the application that wants to participate in the asynchronous notification;</li>
+<li><code>DatabaseEvent</code> interface which represents the object that will be passed to the <code>EventListener</code> notification method;</li>
+<li>Implementation of the above interfaces: <code>FBEventManager</code> and <code>FBDatabaseEvent</code>.</li>
+</ul>
+<p><strong>Please note, that each instance of <code>FBEventManager</code> will open a new socket connection to the Firebird server on the port specified by Firebird.</strong></p>
+<p>Similar to other JDBC extensions in Jaybird, the interfaces are released under the modified BSD license, the implementation of the code is released under LGPL license.</p>
+</section>
+<section id="default-holdable-result-sets-closed-resultset-in-auto-commit-mode" class="level2">
+<h2><span class="header-section-number">8.2</span> Default holdable result sets (closed ResultSet in auto-commit mode)</h2>
+<p>This connection property allows to create holdable result sets by default. This is needed as a workaround for the applications that do not follow JDBC specification in regard to the auto-commit mode.</p>
+<p>Specifically, such applications open a result set and, while traversing it, execute other statements using the same connection. According to JDBC specification the result set has to be closed if another statement is executed using the same connection in auto-commit mode. Among others the OpenOffice/LibreOffice Base users have problems with the JDBC compatibility in Jaybird.</p>
+<p>The property is called:</p>
+<ul>
+<li><code>defaultResultSetHoldable</code> as connection property for JDBC URL or for <code>java.sql.DriverManager</code> class and no or empty value should be assigned to it; it has an alias <code>defaultHoldable</code> to simplify the typing;</li>
+<li><code>isc_dpb_result_set_holdable</code> as a DPB member;</li>
+<li><code>FirebirdConnectionProperties</code> interface methods <code>isDefaultResultSetHoldable()</code> and <code>setDefaultResultSetHoldable(boolean)</code></li>
+</ul>
+<p><strong>Note, the price for using this feature is that each holdable result set will be fully cached in memory. The memory occupied by it will be released when the statement that produced the result set is either closed or re-executed.</strong></p>
+</section>
+<section id="updatable-result-sets" class="level2">
+<h2><span class="header-section-number">8.3</span> Updatable result sets</h2>
+<p>Jaybird provides support for updatable result sets. This feature allows a Java application to update the current record using the <code>update</code><em><code>XXX</code></em> methods of <code>java.sql.ResultSet</code> interface. Updates are performed within the current transaction using a best row identifier in the <code>WHERE</code>-clause. This sets the following limitation on the result set &quot;updatability&quot;:</p>
+<ul>
+<li>the <code>SELECT</code> references a single table;</li>
+<li>all columns not referenced in <code>SELECT</code> permit <code>NULL</code>s (otherwise <code>INSERT</code>s will fail);</li>
+<li>the <code>SELECT</code> statement does not contain a <code>DISTINCT</code> predicate, aggregate functions, joined tables or stored procedures;</li>
+<li>the <code>SELECT</code> statement references all columns from the table primary key definition or a <code>RDB$DB_KEY</code> column.</li>
+</ul>
+</section>
+<section id="firebird-management-interfaces" class="level2">
+<h2><span class="header-section-number">8.4</span> Firebird management interfaces</h2>
+<p>Jaybird provides full support of the Firebird Services API that allows Java applications to perform various server management tasks:</p>
+<ul>
+<li>database backup/restore on remote server; it is possible to performs metadata-only backups, switch the garbage collection during backup off, restore databases with no validity constraints or active indices, etc.</li>
+<li>database maintenance, e.g. database shutdown, sweep, changing the forced writes settings, changing SQL dialect of the database, shadow management, etc.</li>
+<li>retrieving database statistics including header page statistics, system table statistics, data page statistics and index statistics.</li>
+<li>user management, including adding, modifying, and deleting user accounts.</li>
+</ul>
+</section>
+<section id="jaybird-jdbc-extensions" class="level2">
+<h2><span class="header-section-number">8.5</span> Jaybird JDBC extensions</h2>
+<p>Jaybird provides extensions to some JDBC interfaces. JDBC extension interface classes are released under modified BSD license, on &quot;AS IS&quot; and &quot;do what you want&quot; basis, this should make linking to these classes safe from the legal point of view. All classes belong to <code>org.firebirdsql.jdbc.*</code> package.</p>
+<p>The table below shows all JDBC extensions present in Jaybird with a driver version in which the extension was introduced.</p>
+<table>
+<colgroup>
+<col style="width: 23%"></col>
+<col style="width: 4%"></col>
+<col style="width: 62%"></col>
+<col style="width: 9%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Interface</th>
+<th style="text-align: left;">Since</th>
+<th style="text-align: left;">Method name</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>FirebirdDriver</code></td>
+<td style="text-align: left;">2.0</td>
+<td style="text-align: left;"><code>newConnectionProperties()</code></td>
+<td style="text-align: left;">Create new instance of <code>FirebirdConnectionProperties</code> interface that can be used to set connection properties programmatically.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>connect(FirebirdConnectionProperties)</code></td>
+<td style="text-align: left;">Connect to the Firebird database using the specified connection properties.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>FirebirdConnectionProperties</code></td>
+<td style="text-align: left;">2.0</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">see <a href="#jdbc-connection-properties">JDBC connection properties</a> section for more details.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>FirebirdConnection</code></td>
+<td style="text-align: left;">1.5</td>
+<td style="text-align: left;"><code>getIscEncoding()</code></td>
+<td style="text-align: left;">Get connection character encoding.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">2.0</td>
+<td style="text-align: left;"><code>getTransactionParameters( int isolationLevel )</code></td>
+<td style="text-align: left;">Get the TPB parameters for the specified transaction isolation level.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">2.0</td>
+<td style="text-align: left;"><code>createTransactionParameterBuffer()</code></td>
+<td style="text-align: left;">Create an empty transaction parameter buffer.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">2.0</td>
+<td style="text-align: left;"><code>setTransactionParameters( int isolationLevel, TransactionParameterBuffer tpb )</code></td>
+<td style="text-align: left;">Set TPB parameters for the specified transaction isolation level. The newly specified mapping is valid for the whole connection lifetime.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">2.0</td>
+<td style="text-align: left;"><code>setTransactionParameters( TransactionParameterBuffer tpb )</code></td>
+<td style="text-align: left;">Parameters are effective until the transaction isolation is changed.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">2.2.9</td>
+<td style="text-align: left;"><code>isUseFirebirdAutocommit()</code></td>
+<td style="text-align: left;">Returns true if the connection uses <code>isc_tpb_autocommit</code> in auto-commit mode.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>FirebirdDatabaseMetaData</code></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>getProcedureSourceCode(String)</code></td>
+<td style="text-align: left;">Get source code for the specified stored procedure name.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>getTriggerSourceCode(String)</code></td>
+<td style="text-align: left;">Get source code for the specified trigger name.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>getViewSourceCode(String)</code></td>
+<td style="text-align: left;">Get source code for the specified view name.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>FirebirdStatement</code></td>
+<td style="text-align: left;">1.5</td>
+<td style="text-align: left;"><code>getInsertedRowsCount()</code></td>
+<td style="text-align: left;">Extension that allows to get more precise information about outcome of some statement.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>getUpdatedRowsCount()</code></td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;"><code>getDeletedRowsCount()</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">1.5</td>
+<td style="text-align: left;"><code>hasOpenResultSet()</code></td>
+<td style="text-align: left;">Check if this statement has open result set. Correctly works only when auto-commit is disabled. Check method documentation for details.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">1.5</td>
+<td style="text-align: left;"><code>getCurrentResultSet()</code></td>
+<td style="text-align: left;">Get current result set. Behaviour of this method is similar to the behavior of the <code>Statement.getResultSet()</code>, except that this method can be called as much as you like.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">1.5</td>
+<td style="text-align: left;"><code>isValid()</code></td>
+<td style="text-align: left;">Check if this statement is still valid. Statement might be invalidated when connection is automatically recycled between transactions due to some irrecoverable error.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">2.0</td>
+<td style="text-align: left;"><code>getLastExecutionPlan()</code></td>
+<td style="text-align: left;">Get execution plan for the last executed statement.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>FirebirdPreparedStatement</code></td>
+<td style="text-align: left;">2.0</td>
+<td style="text-align: left;"><code>getExecutionPlan()</code></td>
+<td style="text-align: left;">Get the execution plan of this prepared statement.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">2.0</td>
+<td style="text-align: left;"><code>getStatementType()</code></td>
+<td style="text-align: left;">Get the statement type of this prepared statement.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>FirebirdCallableStatement</code></td>
+<td style="text-align: left;">1.5</td>
+<td style="text-align: left;"><code>setSelectableProcedure( boolean selectable )</code></td>
+<td style="text-align: left;">Mark this callable statement as a call of the selectable procedure. By default callable statement uses <code>EXECUTE PROCEDURE</code> SQL statement to invoke stored procedures that return single row of output parameters or a result set. In former case it retrieves only the first row of the result set.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>FirebirdResultSet</code></td>
+<td style="text-align: left;">2.0</td>
+<td style="text-align: left;"><code>getExecutionPlan()</code></td>
+<td style="text-align: left;">Get execution plan for this result set.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>FirebirdBlob</code></td>
+<td style="text-align: left;">1.5</td>
+<td style="text-align: left;"><code>detach()</code></td>
+<td style="text-align: left;">Method detaches a blob object from the underlying result set. Lifetime of the detached blob is limited by the lifetime of the connection.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">1.5</td>
+<td style="text-align: left;"><code>isSegmented()</code></td>
+<td style="text-align: left;">Check if this blob is segmented. Seek operation is not defined for the segmented blobs.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">1.5</td>
+<td style="text-align: left;"><code>setBinaryStream( long position )</code></td>
+<td style="text-align: left;">Opens an output stream at the specified position, allows modifying blob content. Due to server limitations only position 0 is supported.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>FirebirdBlob.BlobInputStream</code></td>
+<td style="text-align: left;">1.5</td>
+<td style="text-align: left;"><code>getBlob()</code></td>
+<td style="text-align: left;">Get corresponding blob instance.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"></td>
+<td style="text-align: left;">1.5</td>
+<td style="text-align: left;"><code>seek(int position)</code></td>
+<td style="text-align: left;">Change the position from which blob content will be read, works only for stream blobs.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>FirebirdSavepoint</code><a href="#fn4" class="footnoteRef" id="fnref4"><sup>4</sup></a></td>
+<td style="text-align: left;">2.0</td>
+<td style="text-align: left;"></td>
+<td style="text-align: left;">interface is equivalent to the <code>java.sql.Savepoint</code> interface introduced in JDBC 3.0 specification, however allows using Firebird savepoints also in JDBC 2.0 (JDK 1.3.x) applications.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="jdbc-connection-properties" class="level2">
+<h2><span class="header-section-number">8.6</span> JDBC connection properties</h2>
+<p>The table below lists the properties for the connections that are obtained from this data source. Commonly used parameters have the corresponding getter and setter methods, the rest of the Database Parameters Block parameters can be set using <code>setNonStandardProperty</code> setter method.</p>
+<table style="width:62%;">
+<colgroup>
+<col style="width: 26%"></col>
+<col style="width: 9%"></col>
+<col style="width: 9%"></col>
+<col style="width: 16%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Property</th>
+<th style="text-align: center;">Getter</th>
+<th style="text-align: center;">Setter</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>database</code></td>
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">+</td>
+<td style="text-align: left;">(<strong>deprecated</strong>) Path to the database in the format <code>[host/port:]&lt;database&gt;</code>. This property is not specified in the JDBC standard. Use the the standard defined <code>serverName</code>, <code>portNumber</code> and <code>databaseName</code> instead.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>serverName</code></td>
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">+</td>
+<td style="text-align: left;">Hostname or IP address of the Firebird server</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>portNumber</code></td>
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">+</td>
+<td style="text-align: left;">Portnumber of the Firebird server</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>databaseName</code></td>
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">+</td>
+<td style="text-align: left;">Database alias or full-path</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>type</code></td>
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">+</td>
+<td style="text-align: left;">Type of the driver to use. Possible values are: <code>PURE_JAVA</code> or <code>TYPE4</code> for type 4 JDBC driver, <code>NATIVE</code> or <code>TYPE2</code> for type 2 JDBC driver, <code>EMBEDDED</code> for using embedded version of the Firebird.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>blobBufferSize</code></td>
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">+</td>
+<td style="text-align: left;">Size of the buffer used to transfer blob content. Maximum value is 64k-1.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>socketBufferSize</code></td>
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">+</td>
+<td style="text-align: left;">Size of the socket buffer. Needed on some Linux machines to fix performance degradation.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>buffersNumber</code></td>
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">+</td>
+<td style="text-align: left;">Number of cache buffers (in database pages) that will be allocated for the connection. Makes sense for ClassicServer only.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>charSet</code></td>
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">+</td>
+<td style="text-align: left;">Character set for the connection. Similar to <code>encoding</code> property, but accepts Java names instead of Firebird ones.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>encoding</code></td>
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">+</td>
+<td style="text-align: left;">Character encoding for the connection. See Firebird documentation for more information.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>useTranslation</code></td>
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">+</td>
+<td style="text-align: left;">Path to the properties file containing character translation map.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>password</code></td>
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">+</td>
+<td style="text-align: left;">Corresponding password.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>roleName</code></td>
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">+</td>
+<td style="text-align: left;">SQL role to use.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>userName</code></td>
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">+</td>
+<td style="text-align: left;">Name of the user that will be used by default.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>useStreamBlobs</code></td>
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">+</td>
+<td style="text-align: left;">Boolean flag tells driver whether stream blobs should be created by the driver, by default false. Stream blobs allow <code>seek</code> operation to be called.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>useStandardUdf</code></td>
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">+</td>
+<td style="text-align: left;">Boolean flag tells driver to assume that standard UDFs are defined in the database. This extends the set of functions available via escaped function calls. This does not affect non-escaped use of functions.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>defaultResultSetHoldable</code></td>
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">+</td>
+<td style="text-align: left;">Boolean flag tells driver to construct the default result set to be holdable. This prevents it from closing in auto-commit mode if another statement is executed over the same connection.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>tpbMapping</code></td>
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">+</td>
+<td style="text-align: left;">TPB mapping for different transaction isolation modes.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>defaultIsolation</code></td>
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">+</td>
+<td style="text-align: left;">Default transaction isolation level. All newly created connections will have this isolation level. One of: <code>TRANSACTION_READ_COMMITTED</code>, <code>TRANSACTION_REPEATABLE_READ</code>, <code>TRANSACTION_SERIALIZABLE</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>defaultTransactionIsolation</code></td>
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">+</td>
+<td style="text-align: left;">Integer value from <code>java.sql.Connection</code> interface corresponding to the transaction isolation level specified in isolation property.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>nonStandardProperty</code></td>
+<td style="text-align: center;"></td>
+<td style="text-align: center;"></td>
+<td style="text-align: left;">Allows to set any valid connection property that does not have corresponding setter method. Two setters are available: <code>setNonStandardProperty(String)</code> method takes only one parameter in form <code>propertyName[=propertyValue]</code>, this allows setting non-standard parameters using configuration files. <code>setNonStandardProperty(String, String)</code> takes property name as first parameter, and its value as the second parameter.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>connectTimeout</code></td>
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">+</td>
+<td style="text-align: left;">The connect timeout in seconds. For the Java wire protocol detects unreachable hosts, for JNI (native protocol) only defines a timeout during the <code>op_accept</code> phase after connecting to the server.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>useFirebirdAutocommit</code></td>
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">+</td>
+<td style="text-align: left;">(<strong>experimental</strong>) When enabled Jaybird does not commit on JDBC auto-commit boundaries, but instead relies on the <code>isc_tpb_autocommit</code> feature of Firebird.</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="jdbc-compatibility" class="level1">
+<h1><span class="header-section-number">9</span> JDBC Compatibility</h1>
+<p>The Jaybird driver is not officially JDBC-compliant as the certification procedure is too expensive. The following lists some of the differences between JDBC specification and Jaybird implementation. This list is not exhaustive.</p>
+<section id="jdbc-deviations-and-unimplemented-features" class="level2">
+<h2><span class="header-section-number">9.1</span> JDBC deviations and unimplemented features</h2>
+<p>The following optional features and the methods for their support are not implemented:</p>
+<ul>
+<li><code>java.sql.Array</code> data type is not (yet) supported</li>
+<li><code>java.sql.Blob</code> does not implement following methods:
+<ul>
+<li><code>position(Blob, long)</code> and <code>position(byte[], long)</code>; Firebird does not provide any server-side optimization for these calls, client application must fetch complete blob content from the server to do pattern search.</li>
+<li><code>truncate(long)</code>; Firebird does not provide such functionality on the server side, application must fetch old BLOB from the server and pump old content into a newly created blob.</li>
+</ul></li>
+<li><code>java.sql.Connection</code>
+<ul>
+<li><code>getCatalog()</code> and <code>setCatalog(String)</code> are not supported by Firebird server</li>
+<li><code>getTypeMap()</code> and <code>setTypeMap(Map)</code> are not supported</li>
+</ul></li>
+<li><code>java.sql.Ref</code> data type is not supported by Firebird server</li>
+<li><code>java.sql.SQLData</code> data type is not supported by Firebird server</li>
+<li><code>java.sql.SQLInput</code> is not supported</li>
+<li><code>java.sql.SQLOutput</code> is not supported</li>
+<li><code>java.sql.SQLXML</code> is not supported</li>
+<li><code>java.sql.RowId</code> is not supported</li>
+<li><code>java.sql.NClob</code> is not supported</li>
+<li><code>java.sql.Statement</code>
+<ul>
+<li><code>cancel()</code> is implemented, but not fully supported by Jaybird</li>
+</ul></li>
+<li><code>java.sql.Struct</code> data type is not supported by server.</li>
+</ul>
+<p>The following methods are implemented, but deviate from the specification:</p>
+<ul>
+<li><code>java.sql.Statement</code>
+<ul>
+<li><code>get/setMaxFieldSize</code> does nothing, Firebird server does not support this feature.</li>
+<li><code>get/setQueryTimeout</code> does nothing, Firebird server does not support this feature.</li>
+</ul></li>
+<li><code>java.sql.PreparedStatement</code>
+<ul>
+<li><code>setObject(int index, Object object, int type)</code> Target SQL type is determined from the class of the passed object and corresponding parameter is ignored.</li>
+<li><code>setObject(int index, Object object, int type, int scale)</code> Same as above, type and scale are ignored.</li>
+</ul></li>
+<li><code>java.sql.ResultSetMetaData</code>
+<ul>
+<li><code>isReadOnly()</code> always returns false</li>
+<li><code>isWritable()</code> always returns true</li>
+<li><code>isDefinitivelyWritable()</code> always returns true</li>
+</ul></li>
+</ul>
+</section>
+</section>
+<section id="jaybird-specifics" class="level1">
+<h1><span class="header-section-number">10</span> Jaybird Specifics</h1>
+<p>Jaybird has some implementation-specific issues that should be considered during development.</p>
+<section id="result-sets" class="level2">
+<h2><span class="header-section-number">10.1</span> Result sets</h2>
+<p>Jaybird behaves differently not only when different result set types are used but also whether the connection is in auto-commit mode or not.</p>
+<ul>
+<li><code>ResultSet.TYPE_FORWARD_ONLY</code> result sets when used in auto-commit mode are completely cached on the client before the execution of the query is finished. This leads to the increased time needed to execute statement, however the result set navigation happens almost instantly. When auto-commit mode is switched off, only part of the result set specified by the fetch size is cached on the client.</li>
+<li><code>ResultSet.TYPE_SCROLL_INSENSITIVE</code> result sets are always cached on the client. The reason is quite simple – the Firebird API does not (yet) provide scrollable cursor support, navigation is possible only in one direction.</li>
+<li><code>ResultSet.HOLD_CURSORS_OVER_COMMIT</code> holdability is supported in Jaybird only for result sets of type <code>ResultSet.TYPE_SCROLL_INSENSITIVE</code>. For other result set types driver will throw an exception.</li>
+</ul>
+</section>
+<section id="using-java.sql.parametermetadata-with-callable-statements" class="level2">
+<h2><span class="header-section-number">10.2</span> Using <code>java.sql.ParameterMetaData</code> with callable Statements</h2>
+<p>This interface can be used only to obtain information about the IN parameters. Also it is not allowed to call the <code>PreparedStatement.getParameterMetaData</code> method before all of the OUT parameters are registered. Otherwise the corresponding method of <code>CallableStatement</code> throws an <code>SQLException</code>, because the driver tries to prepare the procedure call with incorrect number of parameters.</p>
+</section>
+<section id="using-resultset.getcharacterstream-with-blob-fields" class="level2">
+<h2><span class="header-section-number">10.3</span> Using <code>ResultSet.getCharacterStream</code> with blob fields</h2>
+<p>Jaybird JDBC driver always uses connection encoding when converting array of bytes into character stream. The <code>BLOB SUB_TYPE 1</code> fields allow setting the character encoding for the field. However when the contents of the field is sent to the client, it is not converted according to the character set translation rules in Firebird, but is sent &quot;as is&quot;. When such fields are accessed from a Java application via Jaybird and character set of the connection does not match the character encoding of the field, conversion errors might happen. Therefore it is recommended to convert such fields in the application using the appropriate encoding.</p>
+</section>
+<section id="heuristic-transaction-completion-support" class="level2">
+<h2><span class="header-section-number">10.4</span> Heuristic transaction completion support</h2>
+<p>Current JCA implementation does not support <code>XAResource.forget(Xid)</code>. It might be important in cases where a distributed transaction - that was at some time in-limbo - was either committed or rolled back by the database administrator. Such transactions appear to Jaybird as successfully completed, however XA specification requires resource manager to &quot;remember&quot; such transaction until the <code>XAResource.forget(Xid)</code> is called.</p>
+</section>
+<section id="compatibility-with-com.sun.rowset." class="level2">
+<h2><span class="header-section-number">10.5</span> Compatibility with <code>com.sun.rowset.*</code></h2>
+<p>The reference implementation of <code>javax.sql.rowset</code> included with Java in package <code>com.sun.rowset</code> does not correctly look up columns by name as it ignores column aliases and only allows look up by the original column name<a href="#fn5" class="footnoteRef" id="fnref5"><sup>5</sup></a> (this specifically applies to <code>com.sun.rowset.CachedRowSetImpl</code>).</p>
+<p>We advise you to either only access columns by their index or use an implementation which correctly uses the column label for column lookup (which is either the alias or the original column name if no alias was defined).</p>
+<p>Jaybird 2.2.1 introduced the connection property <code>columnLabelForName</code> for backwards compatible behavior of <code>ResultSetMetaData#getColumnName(int)</code>. Set property to <code>true</code> for backwards compatible behavior (<code>getColumnName()</code> returns the column label); don't set the property or set it to <code>false</code> for JDBC-compliant behavior (recommended).</p>
+</section>
+<section id="support-for-firebird-3-boolean-type" class="level2">
+<h2><span class="header-section-number">10.6</span> Support for Firebird 3 <code>BOOLEAN</code> type</h2>
+<p>Jaybird 2.2.4 introduces support for the Firebird 3 <code>BOOLEAN</code> type. A boolean field can also be set with all numeric setters and the string setter (as implied by JDBC 4.1 appendix B).</p>
+<p>For numeric types, currently only <code>0</code> will set to <code>false</code> and all other values will set to <code>true</code>. This is something that might change in the future. Only <code>0</code> for <code>false</code> and <code>1</code> for <code>true</code> are guaranteed, in the future we might decide to throw a conversion exception for other values!</p>
+<p>For string types we currently set <code>true</code> for <code>&quot;true&quot;</code>, <code>&quot;T&quot;</code>, <code>&quot;Y&quot;</code> and <code>&quot;1&quot;</code> (case insensitive, ignoring whitespace), all other values will set <code>false</code>; this is for compatibility with the current <code>getBoolean</code> behaviour of <code>FBStringField</code>. This is something that might change in the future. Only <code>&quot;true&quot;</code> and <code>&quot;1&quot;</code> for <code>true</code> and <code>&quot;false&quot;</code> and <code>&quot;0&quot;</code> for <code>false</code> are guaranteed (case insensitive, ignoring whitespace), in the future we might decide to throw a conversion exception for other values!</p>
+<p>When using string or numeric setters for a boolean field we <strong>strongly recommend</strong> to only use the guaranteed values (<code>0</code>, <code>1</code>, <code>&quot;0&quot;</code>, <code>&quot;1&quot;</code>, <code>&quot;true&quot;</code> and <code>&quot;false&quot;</code>). Better yet: use the boolean setter instead.</p>
+</section>
+</section>
+<section id="connection-pooling-with-jaybird" class="level1">
+<h1><span class="header-section-number">11</span> Connection pooling with Jaybird</h1>
+<p>As described in <a href="#important-changes-to-datasources">Important changes to Datasources</a>, the <code>ConnectionPoolDataSource</code>implementations in <code>org.firebirdsql.pool</code> contain some serious issues. The connection pool capability which depends on these classes will be removed in Jaybird 3.0.</p>
+<p>This change leaves only the <code>ConnectionPoolDataSource</code> implementations in <code>org.firebirdsql.ds</code> (for use by application server connection pools). There are no plans to reintroduce a new standalone connection pooling capability. We probably will migrate some of the features like statement pooling to the normal JDBC driver.</p>
+<p>If you require standalone connection pooling, or use an application server which has no built-in connectionpool, please consider using a third-party connection pool like c3p0, DBCP or HikariCP.</p>
+<section id="description-of-deprecated-org.firebirdsql.pool-classes" class="level2">
+<h2><span class="header-section-number">11.1</span> Description of deprecated <code>org.firebirdsql.pool</code> classes</h2>
+<blockquote>
+<p><strong>WARNING: This section provides information on deprecated classes</strong></p>
+<p>See <a href="#important-changes-to-datasources">Important changes to Datasources</a></p>
+</blockquote>
+<p>Connection pooling provides effective way to handle physical database connections. It is believed that establishing new connection to the database takes some noticeable amount or time and in order to speed things up one has to reuse connections as much as possible. While this is true for some software and for old versions of Firebird database engine, establishing connection is hardly noticeable with Firebird 1.0.3 and Firebird 1.5. So why is connection pooling needed?</p>
+<p>There are few reasons for this. Each good connection pool provides a possibility to limit number of physical connections established with the database server. This is an effective measure to localize connection leaks. Any application cannot open more physical connections to the database than allowed by connection pool. Good pools also provide some hints where connection leak occurred. Another big advantage of connection pool is that it becomes a central place where connections are obtained, thus simplifying system configuration. However, main advantage of good connection pool comes from the fact that in addition to connection pooling, it can pool also prepared statement. Tests executed using AS3AP benchmark suite show that prepared statement pooling might increase speed of the application by 100% keeping source code clean and understandable.</p>
+</section>
+<section id="usage-scenario" class="level2">
+<h2><span class="header-section-number">11.2</span> Usage scenario</h2>
+<p>When some statement is used more than one time, it makes sense to use prepared statement. It will be compiled by the server only once, but reused many times. It provides significant speedup when some statement is executed in a loop. But what if some prepared statement will be used during lifetime of some object? Should we prepare it in object's constructor and link object lifetime to JDBC connection lifetime or should we prepare statement each time it is needed? All such cases make handling of the prepared statements hard, they pollute application's code with irrelevant details.</p>
+<p>Connection and statement pooling remove such details from application's code. How would the code in this case look like? Here's the example</p>
+<div class="sourceCode"><table class="sourceCode java numberLines"><tr class="sourceCode"><td class="lineNumbers"><pre>1
+2
+3
+4
+5
+6
+7
+8
+9
+10
+11
+12
+13
+14
+15
+16
+</pre></td><td class="sourceCode"><pre><code class="sourceCode java">Connection connection = dataSource.<span class="fu">getConnection</span>();
+<span class="kw">try</span> {
+    PreparedStatement ps = connection.<span class="fu">prepareStatement</span>(
+        “SELECT * FROM test_table WHERE id = ?”);
+    <span class="kw">try</span> {
+        ps.<span class="fu">setInt</span>(<span class="dv">1</span>, id);
+        ResultSet rs = ps.<span class="fu">executeQuery</span>();
+        <span class="kw">while</span> (rs.<span class="fu">next</span>()) {
+            <span class="co">// do something here</span>
+        }
+    } <span class="kw">finally</span> {
+        ps.<span class="fu">close</span>();
+    }
+} <span class="kw">finally</span> {
+    connection.<span class="fu">close</span>();
+}</code></pre></td></tr></table></div>
+<p>Lines 1-16 show typical code when prepared statement pooling is used. The application obtains a JDBC connection from the data source (instance of <code>javax.sql.DataSource</code> interface), prepares some SQL statement as if it is used for the first time, sets parameters, and executes the query. Lines 12 and 15 ensure that statement and connection will be released under any circumstances. Where do we benefit from the statement pooling? The call to prepare a statement in lines 3-4 is intercepted by the pool, which checks if there's a free prepared statement for the specified SQL query. If no such statement is found it prepares a new one. In line 12 the prepared statement is not closed, but returned to the pool, where it waits for the next call. Same happens to the connection object that is returned to the pool in line 15.</p>
+</section>
+<section id="connection-pool-classes-deprecated" class="level2">
+<h2><span class="header-section-number">11.3</span> Connection Pool Classes (deprecated)</h2>
+<p>Jaybird connection pooling classes belong to the <code>org.firebirdsql.pool.*</code> package. Description of some connection pool classes:</p>
+<table style="width:62%;">
+<colgroup>
+<col style="width: 45%"></col>
+<col style="width: 16%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Class</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>AbstractConnectionPool</code></td>
+<td style="text-align: left;">Base class for all connection pools. Can be used for implementing custom pools, not necessarily for JDBC connections.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>BasicAbstractConnectionPool</code></td>
+<td style="text-align: left;">Subclass of <code>AbstractConnectionPool</code>, implements <code>javax.sql.ConnectionPoolDataSource</code> interface. Also provides some basic properties (minimum and maximum number of connections, blocking and idle timeout, etc) and code to handle JNDI-related issues.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>DriverConnectionPoolDataSource</code></td>
+<td style="text-align: left;">Implementation of <code>javax.sql.ConnectionPoolDataSource</code> for arbitrary JDBC drivers, uses <code>java.sql.DriverManager</code> to obtain connections, can be used as JNDI object factory.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>FBConnectionPoolDataSource</code></td>
+<td style="text-align: left;">Jaybird specific implementation of <code>javax.sql.ConnectionPoolDataSource</code> and <code>javax.sql.XADataSource</code> interfaces, can be used as JNDI object factory.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>FBSimpleDataSource</code></td>
+<td style="text-align: left;">Implementation of <code>javax.sql.DataSource</code> interface, no connection and statement pooling is available, connections are physically opened in <code>getConnection()</code> method and physically closed in their <code>close()</code> method.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>FBWrappingDataSource</code></td>
+<td style="text-align: left;">Implementation of <code>javax.sql.DataSource</code> interface that uses <code>FBConnectionPoolDataSource</code> to allocate connections. This class defines some additional properties that affect allocated connections. Can be used as JNDI object factory.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>SimpleDataSource</code></td>
+<td style="text-align: left;">Implementation of <code>javax.sql.DataSource</code> interface that uses <code>javax.sql.ConnectionPoolDataSource</code> to allocate physical connections.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="org.firebirdsql.pool.fbconnectionpooldatasource-deprecated" class="level2">
+<h2><span class="header-section-number">11.4</span> <code>org.firebirdsql.pool.FBConnectionPoolDataSource</code> (deprecated)</h2>
+<p>This class is a corner stone of connection and statement pooling in Jaybird. It can be instantiated within the application as well as it can be made accessible to other applications via JNDI. Class implements both <code>java.io.Serializable</code> and <code>javax.naming.Referenceable</code> interfaces, which allows using it in a wide range of web and application servers.</p>
+<p>Class implements both <code>javax.sql.ConnectionPoolDataSource</code> and <code>javax.sql.XADataSource</code> interfaces. Pooled connections returned by this class implement <code>javax.sql.PooledConnection</code> and <code>javax.sql.XAConnection</code> interfaces and can participate in distributed JTA transactions.</p>
+<p>Class provides following configuration properties:</p>
+<section id="standard-jdbc-properties" class="level3">
+<h3><span class="header-section-number">11.4.1</span> Standard JDBC Properties</h3>
+<p>This group contains properties defined in the JDBC specification and should be standard to all connection pools.</p>
+<table style="width:60%;">
+<colgroup>
+<col style="width: 23%"></col>
+<col style="width: 9%"></col>
+<col style="width: 9%"></col>
+<col style="width: 16%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Property</th>
+<th style="text-align: center;">Getter</th>
+<th style="text-align: center;">Setter</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>maxIdleTime</code></td>
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">+</td>
+<td style="text-align: left;">Maximum time in milliseconds after which idle connection in the pool is closed.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>maxPoolSize</code></td>
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">+</td>
+<td style="text-align: left;">Maximum number of open physical connections.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>minPoolSize</code></td>
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">+</td>
+<td style="text-align: left;">Minimum number of open physical connections. If value is greater than 0, corresponding number of connections will be opened when first connection is obtained.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>maxStatements</code></td>
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">+</td>
+<td style="text-align: left;">Maximum size of prepared statement pool. If 0, statement pooling is switched off. When application requests more statements than can be kept in pool, Jaybird will allow creating that statements, however closing them would not return them back to the pool, but rather immediately release the resources.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="pool-properties" class="level3">
+<h3><span class="header-section-number">11.4.2</span> Pool Properties</h3>
+<p>This group of properties are specific to the Jaybird implementation of the connection pooling classes.</p>
+<table style="width:64%;">
+<colgroup>
+<col style="width: 27%"></col>
+<col style="width: 9%"></col>
+<col style="width: 9%"></col>
+<col style="width: 16%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Property</th>
+<th style="text-align: center;">Getter</th>
+<th style="text-align: center;">Setter</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>blockingTimeout</code></td>
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">+</td>
+<td style="text-align: left;">Maximum time in milliseconds during which application can be blocked waiting for a connection from the pool. If no free connection can be obtained, exception is thrown.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>retryInterval</code></td>
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">+</td>
+<td style="text-align: left;">Period in which pool will try to obtain new connection while blocking the application.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>pooling</code></td>
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">+</td>
+<td style="text-align: left;">Allows to switch connection pooling off.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>statementPooling</code></td>
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">+</td>
+<td style="text-align: left;">Allows to switch statement pooling off.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>pingStatement</code></td>
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">+</td>
+<td style="text-align: left;">Statement that will be used to &quot;ping&quot; JDBC connection, in other words, to check if it is still alive. This statement must always succeed.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>pingInterval</code></td>
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">+</td>
+<td style="text-align: left;">Time during which connection is believed to be valid in any case. Pool &quot;pings&quot; connection before giving it to the application only if more than specified amount of time passed since last &quot;ping&quot;.</td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="runtime-pool-properties" class="level3">
+<h3><span class="header-section-number">11.4.3</span> Runtime Pool Properties</h3>
+<p>This group contains read-only properties that provide information about the state of the pool.</p>
+<table style="width:61%;">
+<colgroup>
+<col style="width: 25%"></col>
+<col style="width: 9%"></col>
+<col style="width: 9%"></col>
+<col style="width: 16%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Property</th>
+<th style="text-align: center;">Getter</th>
+<th style="text-align: center;">Setter</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>freeSize</code></td>
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: left;">Tells how many free connections are in the pool. Value is between 0 and <code>totalSize</code>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>workingSize</code></td>
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: left;">Tells how many connections were taken from the pool and are currently used in the application.</td>
+</tr>
+<tr class="odd">
+<td style="text-align: left;"><code>totalSize</code></td>
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: left;">Total size of open connection. At the pool creation – 0, after obtaining first connection – between <code>minPoolSize</code> and <code>maxPoolSize</code>.</td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>connectionCount</code></td>
+<td style="text-align: center;">+</td>
+<td style="text-align: center;">-</td>
+<td style="text-align: left;">(<strong>Deprecated</strong>). Same as <code>freeSize</code>.</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+<section id="org.firebirdsql.pool.fbwrappingdatasource" class="level2">
+<h2><span class="header-section-number">11.5</span> <code>org.firebirdsql.pool.FBWrappingDataSource</code></h2>
+<p>This class is a wrapper for <code>FBConnectionPoolDataSource</code> converting the interface from <code>javax.sql.ConnectionPoolDataSource</code> to <code>javax.sql.DataSource</code>. It defines same properties as <code>FBConnectionPoolDataSource</code> does.</p>
+</section>
+<section id="runtime-object-allocation-and-deallocation-hints" class="level2">
+<h2><span class="header-section-number">11.6</span> Runtime object allocation and deallocation hints</h2>
+<p>The Ppool implementation shipped with Jaybird can provide hints for the application where the connection was obtained from the pool, when it was released back to the pool, when the statement was prepared. Such information is written into the log when appropriate system properties are set to <code>true</code>.</p>
+<section id="list-of-properties" class="level3">
+<h3><span class="header-section-number">11.6.1</span> List of properties</h3>
+<table style="width:49%;">
+<colgroup>
+<col style="width: 31%"></col>
+<col style="width: 16%"></col>
+</colgroup>
+<thead>
+<tr class="header">
+<th style="text-align: left;">Property name</th>
+<th style="text-align: left;">Description</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td style="text-align: left;"><code>FBLog4j</code></td>
+<td style="text-align: left;">Enables logging inside driver. This is the essential property, if it is not present or set to <code>false</code>, no debug information is available.<br />
+When it is set to <code>true</code>, pool automatically prints the following information:<br />
+- When physical connection is added to the pool – <code>DEBUG</code><br />
+- When a maximum pool capacity is reached – <code>DEBUG</code><br />
+- When connection is obtained from pool – <code>DEBUG</code><br />
+- When connection is released back to pool – <code>DEBUG</code><br />
+- Whether pool supports open statements across transaction boundaries – <code>INFO</code></td>
+</tr>
+<tr class="even">
+<td style="text-align: left;"><code>FBPoolShowTrace</code></td>
+<td style="text-align: left;">Enables logging of the thread stack trace when debugging is enabled and:<br />
+- Connection is allocated from the pool – <code>DEBUG</code><br />
+- Thread is blocked while waiting for a free connection – <code>WARN</code><br />
+</td>
+</tr>
+</tbody>
+</table>
+</section>
+</section>
+</section>
+<section class="footnotes">
+<hr />
+<ol>
+<li id="fn1"><p>With <code>java.sql.Timestamp</code> the 100 microsecond precision is only available through <code>getNanos()</code> and <code>setNanos()</code><a href="#fnref1">↩</a></p></li>
+<li id="fn2"><p>See <a href="http://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html" class="uri">http://docs.oracle.com/javase/tutorial/essential/exceptions/tryResourceClose.html</a><a href="#fnref2">↩</a></p></li>
+<li id="fn3"><p>See <a href="http://www.oracle.com/technetwork/java/eol-135779.html" class="uri">http://www.oracle.com/technetwork/java/eol-135779.html</a><a href="#fnref3">↩</a></p></li>
+<li id="fn4"><p>To be removed in Jaybird 3.0<a href="#fnref4">↩</a></p></li>
+<li id="fn5"><p>See <a href="http://tracker.firebirdsql.org/browse/JDBC-162">JDBC-162</a> and <a href="http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=7046875" class="uri">http://bugs.sun.com/bugdatabase/view_bug.do?bug_id=7046875</a> for details<a href="#fnref5">↩</a></p></li>
+</ol>
+</section>
+</body>
+</html>

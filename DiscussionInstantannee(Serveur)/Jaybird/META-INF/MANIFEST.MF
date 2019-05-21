@@ -1,0 +1,13 @@
+Manifest-Version: 1.0
+Ant-Version: Apache Ant 1.9.4
+Created-By: 25.74-b02 (Oracle Corporation)
+Specification-Title: Firebird Jaybird
+Specification-Version: 2.2
+Specification-Vendor: FirebirdSQL (http://www.firebirdsql.org)
+Implementation-Title: Jaybird
+Implementation-URL: http://www.firebirdsql.org
+Implementation-Version: 2.2.10-JDK_1.8 (build: tag=v2.2.10 date=201603
+ 131640)
+Implementation-Vendor: Firebird project
+Implementation-Vendor-Id: http://www.firebirdsql.org
+
